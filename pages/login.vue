@@ -23,45 +23,51 @@
       </section>
     </header>
     <main class="container-fluid flex justify-center">
-      <section class="bg-white rounded-3xl background text-center">
-        <h1 class="text-4xl pb-6 text-dark-custom text-center">Entrar</h1>
-        <form action="" class="justify-center">
-          <input
-            id="email"
-            type="email"
-            name="email"
-            placeholder="Email"
-            class="config focus:outline-none border-opacity-25 text-lg w-80"
-          />
-          <input
-            id="password"
-            type="password"
-            name="password"
-            placeholder="Senha"
-            class="config focus:outline-none text-lg w-80"
-          />
-          <br />
-          <a href="#" class="text-dark-custom">Esqueci minha senha</a>
-          <br />
-          <button
-            class="text-xl bg-dark-custom text-white w-2/4 p-2 rounded-full mt-6"
-            type="submit"
-          >
-            Entrar
-          </button>
-        </form>
-        <span class="flex items-center justify-center p-2 text-gray-500">
-          <hr style="width: 6em; margin-right: 1em" />
-          ou
-          <hr style="width: 6em; margin-left: 1em" />
-        </span>
-        <button
-          onclick="window.location.href = '/'"
-          class="text-xl border-2 border-dark-custom text-dark-custom w-2/4 p-2 mb-10 rounded-full"
+      <div
+        class="w-full h-full px-2 flex justify-center items-center fixed top-0 bottom-0 right-0 left-0 z-40"
+      >
+        <section
+          class="bg-white rounded-3xl text-center p-10 flex flex-col justify-center items-center"
         >
-          Criar conta
-        </button>
-      </section>
+          <h1 class="text-4xl pb-3 font-semibold text-dark-custom text-center">
+            Entrar
+          </h1>
+          <form class="w-9/12">
+            <a-flat-input
+              class="input my-1"
+              type="email"
+              placeholder="E-mail"
+            />
+            <a-flat-input class="input my-1" type="text" placeholder="Senha" />
+
+            <p class="text-dark-custom text-left font-thin mt-1">
+              Esqueci minha senha
+            </p>
+
+            <div class="flex flex-col justify-center items-center px-10">
+              <button
+                class="text-sm bg-dark-custom text-white p-2 rounded-full mt-6 w-full"
+              >
+                Entrar
+              </button>
+
+              <span
+                class="flex items-center justify-center p-2 text-gray-500 w-full"
+              >
+                <hr class="w-full mr-4" />
+                ou
+                <hr class="w-full ml-4" />
+              </span>
+
+              <button
+                class="text-sm border-2 border-dark-custom text-dark-custom p-2 mb-10 rounded-full w-full whitespace-no-wrap"
+              >
+                Criar Conta
+              </button>
+            </div>
+          </form>
+        </section>
+      </div>
     </main>
     <Footer />
   </section>
@@ -69,19 +75,4 @@
 
 <style lang="css">
 @import url('~assets/styles/main.scss');
-.background {
-  position: relative;
-  bottom: 8em;
-  padding: 30px;
-  width: 50%;
-  z-index: 10;
-}
-.config {
-  width: 80%;
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-  padding-left: 0.5em;
-  border-bottom: 1px solid rgb(177, 177, 177);
-  margin-bottom: 1em;
-}
 </style>
