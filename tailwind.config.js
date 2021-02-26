@@ -11,6 +11,9 @@ module.exports = {
         'pink-custom': '#E5286B',
         'pink-dark-custom': '#b81d53',
       },
+      padding: {
+        14: '3.5em',
+      },
     },
   },
   variants: {},
