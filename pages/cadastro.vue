@@ -22,34 +22,63 @@
         </svg>
       </section>
     </header>
-    <main class="container-fluid flex justify-center">
+    <main>
       <div
         class="w-full h-full px-2 flex justify-center items-center fixed top-0 bottom-0 right-0 left-0 z-40"
       >
         <section
-          class="bg-white rounded-3xl text-center p-10 flex flex-col justify-center items-center"
+          class="bg-white rounded-3xl text-center py-5 flex flex-col items-center justify-center"
         >
           <h1 class="text-4xl pb-3 font-semibold text-dark-custom text-center">
-            Entrar
+            Criar conta
           </h1>
           <form class="w-9/12">
             <a-flat-input
               class="input my-1"
+              type="text"
+              name="nome"
+              placeholder="Nome"
+            />
+            <section class="flex flex-row justify-around my-1">
+              <div>
+                <input
+                  id="fisica"
+                  class="input my-1"
+                  type="radio"
+                  name="radio"
+                />
+                <label class="text-gray-700" for="fisica">Pessoa Física</label>
+              </div>
+              <div>
+                <input id="juridica" type="radio" name="radio" />
+                <label class="text-gray-700" for="juridica"
+                  >Pessoa Jurídica</label
+                >
+              </div>
+            </section>
+            <a-flat-input class="input my-1" type="text" placeholder="CPF" />
+            <a-flat-input
+              class="input my-1 text-gray-600"
+              type="text"
+              placeholder="Data de nascimento"
+            />
+            <a-flat-input
+              class="input my-1 text-gray-600"
               type="email"
               placeholder="E-mail"
             />
-            <a-flat-input class="input my-1" type="text" placeholder="Senha" />
-
-            <p class="text-dark-custom text-left font-thin mt-1">
-              <a href="/recuperarsenha">Esqueci minha senha</a>
-            </p>
+            <a-flat-input
+              class="input my-1 text-gray-600"
+              type="password"
+              placeholder="Senha"
+            />
 
             <div class="flex flex-col justify-center items-center px-10">
               <nuxt-link
-                to="/dashboard"
+                to="/user/confirm"
                 class="text-sm bg-dark-custom text-white p-2 rounded-full mt-6 w-full"
               >
-                <button>Entrar</button>
+                <button>Cadastrar</button>
               </nuxt-link>
 
               <span
@@ -59,12 +88,11 @@
                 ou
                 <hr class="w-full ml-4" />
               </span>
-
               <nuxt-link
-                to="/cadastro"
+                to="/login"
                 class="text-sm border-2 border-dark-custom text-dark-custom p-2 mb-10 rounded-full w-full whitespace-no-wrap"
               >
-                <button>Criar Conta</button>
+                <button>Já tenho uma conta</button>
               </nuxt-link>
             </div>
           </form>
