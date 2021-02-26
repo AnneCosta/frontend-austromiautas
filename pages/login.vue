@@ -24,7 +24,7 @@
     </header>
     <main class="container-fluid flex justify-center">
       <section class="bg-white rounded-3xl background text-center">
-        <h1 class="text-4xl pb-8 text-dark-custom text-center">Entrar</h1>
+        <h1 class="text-4xl pb-6 text-dark-custom text-center">Entrar</h1>
         <form action="" class="justify-center">
           <input
             id="email"
@@ -50,9 +50,14 @@
             Entrar
           </button>
         </form>
+        <span class="flex items-center justify-center p-2 text-gray-500">
+          <hr style="width: 6em; margin-right: 1em" />
+          ou
+          <hr style="width: 6em; margin-left: 1em" />
+        </span>
         <button
           onclick="window.location.href = '/'"
-          class="text-xl border-2 border-dark-custom text-dark-custom w-2/4 p-2 rounded-full mt-2"
+          class="text-xl border-2 border-dark-custom text-dark-custom w-2/4 p-2 mb-10 rounded-full"
         >
           Criar conta
         </button>
