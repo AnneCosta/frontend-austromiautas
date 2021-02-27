@@ -12,6 +12,9 @@ module.exports = {
         'pink-dark-custom': '#b81d53',
         'light-gray-custom': '#b1b1b1',
       },
+      fontFamily: {
+        sans: ['Assistant', 'sans-serif'],
+      },
     },
   },
   variants: {},
