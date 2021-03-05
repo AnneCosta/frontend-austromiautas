@@ -1,0 +1,48 @@
+version: "3.7"
+
+services:
+  app_v1:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 3000:3000
+    networks: 
+      - app
+    depends_on: 
+      - api_v1
+    volumes: 
+      - .:/usr/app
+
+  api_v1:
+    image: gabrieljsilva/austromiautas
+    ports: 
+      - 3333:3333
+    networks: 
+      - app
+    depends_on: 
+      - postgresdb
+      - redisdb
+    env_file: 
+      - .env
+
+  postgresdb:
+    image: postgres:13.1-alpine
+    environment: 
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=austromiautas
+    volumes:
+      - /var/lib/postgresql/data
+    ports: 
+      - ${DB_PORT}:${DB_PORT}
+    networks: 
+      - app
+
+  redisdb:
+    image: redis:6.2.0
+    networks: 
+      - app
+  
+networks:
+  app:
