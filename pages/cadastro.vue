@@ -29,11 +29,12 @@
         <section
           class="bg-white rounded-3xl text-center py-5 flex flex-col items-center justify-center"
         >
-          <h1 class="text-4xl pb-3 font-semibold text-dark-custom text-center">
+          <h1 class="text-4xl pb-3 font-bold text-dark-custom text-center">
             Criar conta
           </h1>
-          <form class="w-9/12">
+          <section class="w-9/12">
             <a-flat-input
+              v-model="user.name"
               class="input my-1"
               type="text"
               name="nome"
@@ -43,43 +44,60 @@
               <div>
                 <input
                   id="fisica"
+                  v-model="user.type"
                   class="input my-1"
                   type="radio"
                   name="radio"
+                  value="cpf"
                 />
                 <label class="text-gray-700" for="fisica">Pessoa Física</label>
               </div>
               <div>
-                <input id="juridica" type="radio" name="radio" />
+                <input
+                  id="juridica"
+                  v-model="user.type"
+                  type="radio"
+                  name="radio"
+                  value="cnpj"
+                />
                 <label class="text-gray-700" for="juridica"
                   >Pessoa Jurídica</label
                 >
               </div>
             </section>
-            <a-flat-input class="input my-1" type="text" placeholder="CPF" />
             <a-flat-input
-              class="input my-1 text-gray-600"
+              v-model="user.document"
+              class="input my-1"
               type="text"
+              placeholder="CPF"
+            />
+            <a-flat-input
+              v-if="user.type === 'cpf'"
+              v-model="user.birth"
+              class="input my-1 text-gray-600"
+              type="date"
               placeholder="Data de nascimento"
             />
             <a-flat-input
+              v-model="user.email"
               class="input my-1 text-gray-600"
               type="email"
               placeholder="E-mail"
             />
             <a-flat-input
+              v-model="user.password"
               class="input my-1 text-gray-600"
               type="password"
               placeholder="Senha"
             />
 
             <div class="flex flex-col justify-center items-center px-10">
-              <nuxt-link
-                to="/user/confirm"
-                class="text-sm bg-dark-custom text-white p-2 rounded-full mt-6 w-full"
+              <button
+                class="text-sm bg-dark-custom text-white p-2 rounded-full mt-6 w-full outline-none focus:outline-none"
+                @click="handleRegister"
               >
-                <button>Cadastrar</button>
-              </nuxt-link>
+                Cadastrar
+              </button>
 
               <span
                 class="flex items-center justify-center p-2 text-gray-500 w-full"
@@ -95,13 +113,71 @@
                 <button>Já tenho uma conta</button>
               </nuxt-link>
             </div>
-          </form>
+          </section>
         </section>
       </div>
     </main>
     <Footer />
   </section>
 </template>
+
+<script>
+import { mapActions } from 'vuex'
+export default {
+  data() {
+    return {
+      user: {
+        name: 'Gabriel Silva',
+        type: 'cpf',
+        document: '86320301597',
+        birth: '2000-01-23',
+        email: 'gabriel@gmail.com',
+        password: '12345678',
+      },
+    }
+  },
+  methods: {
+    ...mapActions({ register: 'user/register' }),
+
+    async handleRegister() {
+      try {
+        await this.register(this.user)
+        this.$toast.success('Doador cadastrado', { position: 'top-center' })
+        this.$router.push('/')
+      } catch (error) {
+        if (error.response.status === 409) {
+          this.$toast.error(
+            'Já existe um doador cadastrado com as credenciais informadas!',
+            {
+              position: 'top-center',
+            }
+          )
+        } else if (error.response.status === 400) {
+          const translatedFields = {
+            email: 'E-mail',
+            name: 'Nome',
+            password: 'Senha',
+            document: 'Documento',
+            birth: 'Nascimento',
+          }
+
+          const fields = error.response.data.errors.map(
+            (err) => translatedFields[err.property]
+          )
+
+          this.$toast.error(`Os seguintes campos são inválidos: ${fields}`, {
+            position: 'top-center',
+          })
+        }
+      } finally {
+        setTimeout(() => {
+          this.$toast.clear()
+        }, 10000)
+      }
+    },
+  },
+}
+</script>
 
 <style lang="css">
 @import url('~assets/styles/main.scss');

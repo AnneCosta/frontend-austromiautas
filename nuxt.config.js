@@ -24,7 +24,7 @@ export default {
   components: true,
   buildModules: ['@nuxtjs/eslint-module', '@nuxtjs/tailwindcss'],
 
-  modules: ['@nuxtjs/axios'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/toast'],
 
   axios: {
     baseURL: `${process.env.API_PROTOCOL}://${process.env.API_HOST}:${process.env.API_PORT}`,
@@ -38,6 +38,4 @@ export default {
   publicRuntimeConfig: {
     token: process.env.X_API_TOKEN,
   },
-
-  build: {},
 }
