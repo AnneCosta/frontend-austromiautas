@@ -40,7 +40,8 @@
               name="nome"
               placeholder="Nome"
             />
-            <section class="flex flex-row justify-around my-1">
+
+            <section class="">
               <div>
                 <input
                   id="fisica"
@@ -50,21 +51,25 @@
                   name="radio"
                   value="cpf"
                 />
-                <label class="text-gray-700" for="fisica">Pessoa Física</label>
+                <label class="text-gray-700" for="fisica">
+                  Pessoa Física
+                </label>
               </div>
               <div>
                 <input
                   id="juridica"
                   v-model="user.type"
+                  class="input my-1"
                   type="radio"
                   name="radio"
                   value="cnpj"
                 />
-                <label class="text-gray-700" for="juridica"
-                  >Pessoa Jurídica</label
-                >
+                <label class="text-gray-700" for="juridica">
+                  Pessoa Jurídica
+                </label>
               </div>
             </section>
+
             <a-flat-input
               v-model="user.document"
               class="input my-1"
@@ -127,12 +132,12 @@ export default {
   data() {
     return {
       user: {
-        name: 'Gabriel Silva',
+        name: '',
         type: 'cpf',
-        document: '86320301597',
-        birth: '2000-01-23',
-        email: 'gabriel@gmail.com',
-        password: '12345678',
+        document: '',
+        birth: '',
+        email: '',
+        password: '',
       },
     }
   },

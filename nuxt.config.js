@@ -1,6 +1,6 @@
 export default {
   head: {
-    title: 'front-austromiautas',
+    title: 'Austromiautas',
     htmlAttrs: {
       lang: 'pt-BR',
     },
@@ -33,9 +33,5 @@ export default {
         'X-API-TOKEN': process.env.X_API_TOKEN,
       },
     },
-  },
-
-  publicRuntimeConfig: {
-    token: process.env.X_API_TOKEN,
   },
 }
