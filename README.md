@@ -17,7 +17,7 @@ To ensure that our project runs smoothly, we need to declare some environment va
 
 | NAME          | DESCRIPTION                                                                                 | EXAMPLES               |
 |---------------|---------------------------------------------------------------------------------------------|------------------------|
-| APP_HOST      | The host name that will be used to run the application.                                     | localhost              |
+| APP_HOST      | The host name that will be used to run the application.                                     | 0.0.0.0                |
 | APP_PORT      | The port that will be used to run the application.                                          | 3333                   |
 | APP_PROTOCOL  | The protocol that will be used by the application (http or https).                          | http                   |
 | DB_HOST       | The host name of the database.                                                              | localhost              |
@@ -60,4 +60,76 @@ $ npm run start
 
 # generate static project
 $ npm run generate
+```
+
+## Docker
+[Docker](https://www.docker.com/) is a powerful virtualization tool, with which we can upload applications in containers quickly and easily using just a few commands. This project is configured to be used in a Dockerized environment.
+After installing Docker and setting the environment variables, we can run the following command:
+
+```bash
+docker-compose up
+```
+
+On linux-based systems we need to give some permissions to the "docker/entrypoint.sh" file. To do this, run the following command:
+
+```bash
+sudo chmod +x docker/entrypoint.sh
+```
+
+and then:
+
+```bash
+sudo docker-compose up
+```
+
+This should ensure adequate permissions to run the application.
+
+### Comments
+It is recommended to use docker-compose only in development environments.
+
+When running the project with the docker-compose you must change some environment variables. For example: DB_HOST and REDIS_HOST must match the name of their respective containers declared in the "docker-compose.yml" file, that is, they must have the following values:
+
+```env
+DB_HOST=postgresdb
+REDIS_HOST=redisdb
+...
+```
+
+The migrations and seeders must be executed through the container terminal, because the environment variables are declared in the context of the containers and our host machine does not have explicit access to them. To access the container we need to follow the following steps:
+
+#### List active containers
+After uploading the container with docker-compose, we can list all active containers with the following command:
+
+```bash
+docker container ls
+```
+
+We will see something like this:
+
+| CONTAINER ID | IMAGE | COMMAND | CREATED | STATUS | PORTS | NAMES                      |
+|--------------|-------|---------|---------|--------|-------|----------------------------|
+| cd4ba6f0b5df | *     | *       | *       | *      | *     | austromiautas_api_v1_1     |
+| 704e637b969e | *     | *       | *       | *      | *     | austromiautas_redisdb_1    |
+| 8f977fa32b94 | *     | *       | *       | *      | *     | austromiautas_postgresdb_1 |
+
+There are 3 active containers, the first is our API, the second from the Redis database and the third from the Postgres database.
+
+#### Accessing the container shell
+To access the container shell, copy the API container id, then execute the following code:
+
+```bash
+docker exec -it apiContainerId /bin/ash
+```
+
+replace "apiContainerId" with the id you copied, the command should look like:
+
+```bash
+docker exec -it cd4ba6f0b5df /bin/ash
+```
+
+This will open the container shell in the "/usr/app" directory where the project files are located, from here you can already execute the codes to run the migrations and seeders. There are:
+
+```bash
+yarn migration:run
+yarn seeder:seed
 ```
