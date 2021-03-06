@@ -8,7 +8,7 @@
         <section
           class="bg-white rounded-3xl text-center p-10 flex flex-col justify-center items-center"
         >
-          <h1 class="text-4xl pb-3 font-semibold text-dark-custom text-center">
+          <h1 class="text-4xl pb-3 font-semibold text-primary text-center">
             Entrar
           </h1>
           <form class="w-9/12">
@@ -19,7 +19,7 @@
             />
             <a-flat-input class="input my-1" type="text" placeholder="Senha" />
 
-            <p class="text-dark-custom text-left font-thin mt-1">
+            <p class="text-primary text-left font-thin mt-1">
               <a href="/recuperarsenha">Esqueci minha senha</a>
             </p>
 

@@ -1,24 +1,26 @@
 <template>
-  <footer class="container-fluid">
+  <footer class="container">
     <section>
       <section class="fixed bottom-0 w-full">
-        <section class="flex absolute" style="bottom: 20px">
-          <section>
-            <img src="~assets/image/Doggie.svg" alt="" width="360" />
-          </section>
-          <section>
-            <img src="~assets/image/petting.svg" alt="" width="360" />
-          </section>
+        <section class="absolute w-full z-0" style="bottom: 40px">
+          <div class="flex justify-between w-full">
+            <section class="ml-6">
+              <img src="~assets/image/Doggie.svg" alt="" width="360" />
+            </section>
+            <section>
+              <img src="~assets/image/petting.svg" alt="" width="360" />
+            </section>
+          </div>
         </section>
         <svg
+          class="z-10"
           xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 100 1440 150"
-          style="position: relative; z-index: -1"
+          viewBox="0 0 1440 320"
         >
           <path
             fill="#202567"
             fill-opacity="1"
-            d="M0,160L48,165.3C96,171,192,181,288,192C384,203,480,213,576,208C672,203,768,181,864,170.7C960,160,1056,160,1152,165.3C1248,171,1344,181,1392,186.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+            d="M0,192L60,186.7C120,181,240,171,360,186.7C480,203,600,245,720,234.7C840,224,960,160,1080,144C1200,128,1320,160,1380,176L1440,192L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
           ></path>
         </svg>
       </section>

@@ -2,7 +2,7 @@
   <main class="container-fluid text-white h-screen">
     <!-- Header -->
     <header>
-      <section class="text-lg flex bg-dark-custom justify-around items-center">
+      <section class="text-lg flex bg-primary justify-around items-center">
         <section class="justify-center content-center">
           <h1 class="text-4xl">Bem vindo à Austromiautas</h1>
           <p class="leading-7">

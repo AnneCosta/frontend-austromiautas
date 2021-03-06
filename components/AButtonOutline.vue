@@ -15,8 +15,8 @@ export default {
   data() {
     return {
       colors: {
-        primary: ['border-dark-custom', 'text-dark-custom'],
-        secondary: ['border-pink-custom', 'text-pink-custom'],
+        primary: ['border-primary', 'text-primary'],
+        secondary: ['border-secondary', 'text-secondary'],
       },
       buttonClasses: [
         'text-sm',
