@@ -3,11 +3,14 @@ module.exports = {
     // removeDeprecatedGapUtilities: true,
     // purgeLayersByDefault: true,
   },
-  purge: [],
+  purge: {
+    enabled: false,
+  },
   theme: {
     extend: {
       colors: {
         'dark-custom': '#202567',
+        'dark-custom-2': '#425A8A',
         'pink-custom': '#E5286B',
         'pink-dark-custom': '#b81d53',
         'light-gray-custom': '#b1b1b1',

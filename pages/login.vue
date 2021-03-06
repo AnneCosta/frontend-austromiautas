@@ -24,26 +24,16 @@
             </p>
 
             <div class="flex flex-col justify-center items-center px-10">
-              <nuxt-link
-                to="/dashboard"
-                class="text-sm bg-dark-custom text-white p-2 rounded-full mt-6 w-full"
-              >
-                <button>Entrar</button>
+              <nuxt-link class="w-full mt-6" to="/dashboard">
+                <a-button class="w-full" color="primary">Entrar</a-button>
               </nuxt-link>
 
-              <span
-                class="flex items-center justify-center p-2 text-gray-500 w-full"
-              >
-                <hr class="w-full mr-4" />
-                ou
-                <hr class="w-full ml-4" />
-              </span>
+              <a-dividir>ou</a-dividir>
 
-              <nuxt-link
-                to="/cadastro"
-                class="text-sm border-2 border-dark-custom text-dark-custom p-2 mb-10 rounded-full w-full whitespace-no-wrap"
-              >
-                <button>Criar Conta</button>
+              <nuxt-link to="/cadastro" class="w-full">
+                <a-button-outline class="w-full">
+                  Criar Conta
+                </a-button-outline>
               </nuxt-link>
             </div>
           </form>
@@ -53,5 +43,3 @@
     <a-footer />
   </section>
 </template>
-
-<style></style>
