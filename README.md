@@ -19,7 +19,6 @@ To ensure that our project runs smoothly, we need to declare some environment va
 |---------------|---------------------------------------------------------------------------------------------|------------------------|
 | APP_HOST      | The host name that will be used to run the application.                                     | 0.0.0.0                |
 | APP_PORT      | The port that will be used to run the application.                                          | 3333                   |
-| APP_PROTOCOL  | The protocol that will be used by the application (http or https).                          | http                   |
 | DB_HOST       | The host name of the database.                                                              | localhost              |
 | DB_PORT       | The database port.                                                                          | 5432                   |
 | DB_USER       | The database user.                                                                          | docker                 |
