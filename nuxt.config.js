@@ -27,12 +27,16 @@ export default {
   modules: ['@nuxtjs/axios'],
 
   axios: {
-    baseURL: 'http://localhost:3333',
+    baseURL: `${process.env.API_PROTOCOL}://${process.env.API_HOST}:${process.env.API_PORT}`,
     headers: {
       common: {
         'X-API-TOKEN': process.env.X_API_TOKEN,
       },
     },
+  },
+
+  publicRuntimeConfig: {
+    token: process.env.X_API_TOKEN,
   },
 
   build: {},

@@ -53,11 +53,7 @@
 </template>
 
 <script>
-export default {
-  mounted() {
-    console.log(this.$config)
-  },
-}
+export default {}
 </script>
 
 <style>
