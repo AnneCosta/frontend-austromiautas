@@ -1,5 +1,5 @@
 <template>
-  <main class="container-fluid text-white">
+  <main class="container-fluid text-white h-screen">
     <!-- Header -->
     <header>
       <section class="text-lg flex bg-dark-custom justify-around items-center">
@@ -48,7 +48,7 @@
         </nuxt-link>
       </section>
     </section>
-    <Footer />
+    <a-footer />
   </main>
 </template>
 
@@ -56,6 +56,4 @@
 export default {}
 </script>
 
-<style>
-@import url(~assets/styles/main.scss);
-</style>
+<style></style>

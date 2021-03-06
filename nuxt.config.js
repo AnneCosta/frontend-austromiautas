@@ -17,14 +17,19 @@ export default {
     port: process.env.APP_PORT | 3000,
   },
 
-  css: [],
+  css: ['@/assets/scss/main.scss'],
 
   plugins: [],
 
   components: true,
+
   buildModules: ['@nuxtjs/eslint-module', '@nuxtjs/tailwindcss'],
 
-  modules: ['@nuxtjs/axios', '@nuxtjs/toast'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/toast', '@nuxtjs/style-resources'],
+
+  styleResources: {
+    scss: ['@/assets/scss/main.scss'],
+  },
 
   axios: {
     baseURL: `${process.env.API_PROTOCOL}://${process.env.API_HOST}:${process.env.API_PORT}`,
