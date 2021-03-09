@@ -14,7 +14,7 @@
             width="80vw"
             class="pb-5"
           />
-          <h1 class="text-4xl pb-3 font-semibold text-dark-custom text-center">
+          <h1 class="text-4xl pb-3 font-semibold text-primary text-center">
             Cadastro quase concluído
           </h1>
           <h4 class="text-lg">

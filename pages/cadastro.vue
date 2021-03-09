@@ -8,7 +8,7 @@
         <section
           class="bg-white rounded-3xl text-center py-5 flex flex-col items-center justify-center"
         >
-          <h1 class="text-4xl pb-3 font-bold text-dark-custom text-center">
+          <h1 class="text-4xl pb-3 font-bold text-primary text-center">
             Criar conta
           </h1>
           <section class="w-9/12">
@@ -77,7 +77,7 @@
 
             <div class="flex flex-col justify-center items-center px-10">
               <button
-                class="text-sm bg-dark-custom text-white p-2 rounded-full mt-6 w-full outline-none focus:outline-none"
+                class="text-sm bg-primary text-white p-2 rounded-full mt-6 w-full outline-none focus:outline-none"
                 @click="handleRegister"
               >
                 Cadastrar
@@ -92,7 +92,7 @@
               </span>
               <nuxt-link
                 to="/login"
-                class="text-sm border-2 border-dark-custom text-dark-custom p-2 mb-10 rounded-full w-full whitespace-no-wrap"
+                class="text-sm border-2 border-primary text-primary p-2 mb-10 rounded-full w-full whitespace-no-wrap"
               >
                 <button>Já tenho uma conta</button>
               </nuxt-link>
@@ -162,5 +162,3 @@ export default {
   },
 }
 </script>
-
-<style lang="css"></style>

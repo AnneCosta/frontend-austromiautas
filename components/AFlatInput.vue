@@ -1,6 +1,6 @@
 <template>
   <input
-    class="border-b border-solid border-light-gray-custom pt-2 pb-1 focus:outline-none border-opacity-25 text-lg w-full"
+    class="border-b border-solid border-gray-500 pt-2 pb-1 focus:outline-none border-opacity-25 text-lg w-full"
     v-bind="$attrs"
     :v-on="$listeners"
     @input="handleInput"

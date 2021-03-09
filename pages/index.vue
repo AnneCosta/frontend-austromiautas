@@ -10,7 +10,9 @@
             querem adotá-los.
           </p>
           <nuxt-link to="/dashboard">
-            <BaseButton>Quero adotar um pet</BaseButton>
+            <a-button color="secondary" size="lg" shape="square"
+              >Quero adotar um pet</a-button
+            >
           </nuxt-link>
         </section>
         <section>
@@ -44,7 +46,9 @@
           dos seus pets caso queira doá-los.
         </p>
         <nuxt-link to="/login">
-          <BaseButton>Quero doar um pet</BaseButton>
+          <a-button color="secondary" size="lg" shape="square"
+            >Quero doar um pet</a-button
+          >
         </nuxt-link>
       </section>
     </section>
