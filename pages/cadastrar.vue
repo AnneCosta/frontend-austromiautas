@@ -88,12 +88,12 @@ export default {
   data() {
     return {
       credentials: {
-        name: 'gabriel',
+        name: '',
         type: 'cpf',
-        document: '86320301597',
-        birth: '2000-01-23',
-        email: 'gabriel@gmail.com',
-        password: '12345678',
+        document: '',
+        birth: '',
+        email: '',
+        password: '',
       },
     }
   },
