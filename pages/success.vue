@@ -1,35 +1,15 @@
 <template>
-  <section>
-    <a-header />
-    <main class="container-fluid flex justify-center">
-      <div
-        class="w-full h-full px-2 flex justify-center items-center fixed top-0 bottom-0 right-0 left-0 z-40"
-      >
-        <section
-          class="bg-white rounded-3xl text-center p-10 flex flex-col justify-center items-center"
-        >
-          <img
-            src="~assets/image/friends.svg"
-            alt="Imagem de uma garota e um cachorro sentados no chão e árvores ao fundo"
-            width="120vw"
-            class="pb-5"
-          />
-          <h1 class="text-4xl pb-3 font-semibold text-primary text-center">
-            Sua conta foi ativada!
-          </h1>
-
-          <h4 class="text-lg">
-            Você está pronto(a) para começar a usar o nosso sistema!
-            <br />Clique no botão abaixo para ser redirecionado para a página de
-            login.
-          </h4>
-          <br />
-          <nuxt-link to="/login">
-            <a-button>Ir para o login</a-button>
-          </nuxt-link>
-        </section>
-      </div>
-    </main>
-    <a-footer />
-  </section>
+  <div class="min-h-screen bg-primary flex justify-center items-center">
+    <a-card class="flex flex-col relative z-10 space-y-5">
+      <h1 class="font-bold text-2xl text-primary">
+        Estamos quase concluindo seu cadastro!
+      </h1>
+      <img src="/image/Mail_sent.svg" alt="email enviado" class="w-48" />
+      <p class="text-md">
+        Para concluir o seu cadastro, acesse seu E-mail e siga os passos
+        indicados!
+      </p>
+    </a-card>
+    <a-footer class="absolute bottom-0 z-0" />
+  </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
   <div>
-    <h1>Página da dash</h1>
+    <h1>Meus Pets</h1>
   </div>
 </template>

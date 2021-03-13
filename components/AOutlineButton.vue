@@ -34,27 +34,27 @@ export default {
     return {
       colors: {
         primary: {
-          enabled: ['bg-primary', 'text-white'],
+          enabled: ['bg-transparent', 'border-primary', 'text-primary'],
           disabled: ['bg-gray-500', 'text-white'],
         },
         secondary: {
-          enabled: ['bg-secondary', 'text-white'],
+          enabled: ['bg-transparent', 'border-secondary', 'text-secondary'],
           disabled: ['bg-gray-500', 'text-white'],
         },
         success: {
-          enabled: ['bg-success', 'text-white'],
+          enabled: ['bg-transparent', 'border-success', 'text-success'],
           disabled: ['bg-gray-500', 'text-white'],
         },
         danger: {
-          enabled: ['bg-danger', 'text-white'],
+          enabled: ['bg-transparent', 'border-danger', 'text-danger'],
           disabled: ['bg-gray-500', 'text-white'],
         },
         warning: {
-          enabled: ['bg-warning', 'text-white'],
+          enabled: ['bg-transparent', 'border-warning', 'text-warning'],
           disabled: ['bg-gray-500', 'text-white'],
         },
         info: {
-          enabled: ['bg-info', 'text-white'],
+          enabled: ['bg-transparent', 'border-info', 'text-info'],
           disabled: ['bg-gray-500', 'text-white'],
         },
       },
@@ -82,6 +82,8 @@ export default {
         'focus:outline-none',
         'select-none',
         'whitespace-no-wrap',
+        'border',
+        'border-solid',
       ],
     }
   },

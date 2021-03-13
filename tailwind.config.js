@@ -10,12 +10,12 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          100: '#4B56F2',
-          200: '#3740B3',
-          300: '#242973',
-          400: '#202567',
-          500: '#181B4D',
-          default: '#202567',
+          100: '#29408A',
+          200: '#253A7D',
+          300: '#1C2B5C',
+          400: '#181B4D',
+          500: '#141F42',
+          default: '#1C2B5C',
         },
         secondary: {
           100: '#F22970',
@@ -60,6 +60,9 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Assistant', 'sans-serif'],
+      },
+      screens: {
+        '2xl': '1536px',
       },
     },
   },

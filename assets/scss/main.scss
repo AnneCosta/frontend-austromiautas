@@ -1,12 +1,3 @@
 @import './reset.scss';
-
-$primary-color: #4B6CC0;
-$secondary-color: hsl(274, 69%, 63%);
-$success: #41BF4A;
-$danger: #E94A47;
-$warning: #EBDB4D;
-$info: #ABC1F8;
-$light: #FFFFFF;
-$dark: #000000;
-$base-header: #202567;
-$true-base-header: #161a47;
+@import './sizing-utils.scss';
+@import './breakpoints.scss';
