@@ -5,12 +5,12 @@
         <h1 class="text-primary font-bold text-3xl">Entrar</h1>
 
         <form class="space-y-6 w-full" @submit.prevent="handleLogin">
-          <div class="space-y-1">
-            <a-flat-input v-model="credentials.email" placeholder="E-mail" />
-            <a-flat-input
+          <div class="space-y-6">
+            <a-input v-model="credentials.email" label="E-mail" />
+            <a-input
               v-model="credentials.password"
               type="password"
-              placeholder="Senha"
+              label="Senha"
             />
           </div>
           <nuxt-link to="/recuperar-senha">

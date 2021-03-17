@@ -66,6 +66,10 @@ module.exports = {
       },
     },
   },
-  variants: {},
+  variants: {
+    extend: {
+      textColor: ['last'],
+    },
+  },
   plugins: [],
 }

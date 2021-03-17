@@ -5,11 +5,8 @@
         <h1 class="text-primary font-bold text-3xl">Criar Conta</h1>
 
         <form class="space-y-6 w-full" @submit.prevent="handleRegister">
-          <div class="space-y-1">
-            <a-flat-input
-              v-model="credentials.name"
-              placeholder="Nome completo"
-            />
+          <div class="space-y-6">
+            <a-input v-model="credentials.name" label="Nome completo" />
 
             <div class="w-full sm:flex justify-around items-center">
               <div class="mt-2">
@@ -38,26 +35,27 @@
               </div>
             </div>
 
-            <a-flat-input
+            <a-input
               v-model="credentials.document"
-              :placeholder="
+              :label="
                 credentials.type === 'cpf' ? 'Seu CPF' : 'CNPJ da sua ONG'
               "
             />
 
-            <a-flat-input
+            <a-input
               v-if="credentials.type === 'cpf'"
               id="birth"
               v-model="credentials.birth"
-              placeholder="Data de nascimento"
+              label="Data de nascimento"
               type="date"
+              elevate-label
             />
 
-            <a-flat-input v-model="credentials.email" placeholder="E-mail" />
+            <a-input v-model="credentials.email" label="E-mail" />
 
-            <a-flat-input
+            <a-input
               v-model="credentials.password"
-              placeholder="Senha"
+              label="Senha"
               type="password"
             />
           </div>
@@ -91,7 +89,7 @@ export default {
         name: '',
         type: 'cpf',
         document: '',
-        birth: '',
+        birth: '2002-01-01',
         email: '',
         password: '',
       },
