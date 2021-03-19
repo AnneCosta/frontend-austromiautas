@@ -25,6 +25,7 @@
 <script>
 import { mapActions } from 'vuex'
 export default {
+  middleware: ['redirect-dashboard'],
   data() {
     return {
       status: 'in progress',

@@ -6,7 +6,7 @@
 
         <form class="space-y-6 w-full" @submit.prevent="handleLogin">
           <div class="space-y-6">
-            <a-input v-model="credentials.email" label="E-mail" />
+            <a-input v-model="credentials.email" type="email" label="E-mail" />
             <a-input
               v-model="credentials.password"
               type="password"
@@ -43,6 +43,7 @@
 <script>
 import { mapActions } from 'vuex'
 export default {
+  middleware: ['redirect-dashboard'],
   data() {
     return {
       credentials: {
@@ -52,7 +53,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions({ login: 'auth/login' }),
+    ...mapActions({ login: 'user/login' }),
     async handleLogin() {
       try {
         await this.login(this.credentials)

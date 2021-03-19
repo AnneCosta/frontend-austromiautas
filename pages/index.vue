@@ -1,7 +1,18 @@
 <template>
   <main class="min-h-screen bg-primary">
     <header class="p-5 sm:bg-primary-400 relative z-0 flex">
-      <div class="w-full space-y-3">
+      <div
+        v-if="user.isLoggedIn"
+        to="/meus-pets"
+        class="text-white absolute right-0 top-0 mt-2 mr-6 text-lg font-semibold flex space-x-6"
+      >
+        <nuxt-link to="/meus-pets">
+          <p>{{ user.name }}</p>
+        </nuxt-link>
+        <p class="cursor-pointer" @click="logout">Sair</p>
+      </div>
+
+      <div class="w-full">
         <h1
           class="font-bold leading-none text-gray-200 text-xl sm:text-3xl xl:text-4xl 2xl:text-6xl"
         >
@@ -9,18 +20,19 @@
         </h1>
 
         <p
-          class="text-white antialiased text-sm md:text-xl xl:text-2xl 2xl:text-5xl"
+          class="text-white antialiased text-sm md:text-xl xl:text-2xl 2xl:text-5xl my-6"
         >
           Nós conectamos pessoas que <br />
           querem doar seus pets à pessoas <br />
           que querem adotá-los.
         </p>
-
-        <a-button color="secondary" shape="square" size="lg">
-          Quero adotar um pet
-        </a-button>
+        <nuxt-link to="/pets">
+          <a-button color="secondary" shape="square" size="lg">
+            Quero adotar um pet
+          </a-button>
+        </nuxt-link>
       </div>
-      <div class="w-full flex justify-center items-center">
+      <div class="w-full flex flex-col justify-center items-center">
         <img
           src="/image/logo_no_bg.png"
           alt="logo"
@@ -82,5 +94,19 @@
 </template>
 
 <script>
-export default {}
+import { mapActions, mapState } from 'vuex'
+export default {
+  data() {
+    return {}
+  },
+  computed: {
+    ...mapState({ user: 'user' }),
+  },
+  mounted() {
+    console.log(this.user)
+  },
+  methods: {
+    ...mapActions({ logout: 'user/logout' }),
+  },
+}
 </script>

@@ -1,13 +1,11 @@
 <template>
   <div>
-    <h1>Meus Pets</h1>
+    <h1>Adotar Pets</h1>
     <nuxt-link to="/">
       <a-button color="secondary" size="lg">Página inicial</a-button>
     </nuxt-link>
   </div>
 </template>
 <script>
-export default {
-  middleware: ['authenticated'],
-}
+export default {}
 </script>

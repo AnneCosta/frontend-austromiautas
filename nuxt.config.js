@@ -13,8 +13,8 @@ export default {
   },
 
   server: {
-    host: process.env.APP_HOST | '0.0.0.0',
-    port: process.env.APP_PORT | 80,
+    host: process.env.APP_HOST ?? '0.0.0.0',
+    port: process.env.APP_PORT ?? 80,
   },
 
   css: ['@/assets/scss/main.scss'],

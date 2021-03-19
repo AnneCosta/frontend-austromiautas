@@ -83,13 +83,14 @@
 <script>
 import { mapActions } from 'vuex'
 export default {
+  middleware: ['redirect-dashboard'],
   data() {
     return {
       credentials: {
         name: '',
         type: 'cpf',
         document: '',
-        birth: '2002-01-01',
+        birth: '',
         email: '',
         password: '',
       },
