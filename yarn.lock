@@ -9100,6 +9100,11 @@ vue@^2.6.12:
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.12.tgz#f5ebd4fa6bd2869403e29a896aed4904456c9123"
   integrity sha512-uhmLFETqPPNyuLLbsKz6ioJ4q7AZHzD8ZVFNATNyICSZouqP2Sz0rotWQC8UNBF6VGSCs5abnKJoStA6JbCbfg==
 
+vueperslides@^2.13.0:
+  version "2.13.0"
+  resolved "https://registry.yarnpkg.com/vueperslides/-/vueperslides-2.13.0.tgz#530889be76ada1554be4342ec41624efa641f455"
+  integrity sha512-AZFGr9/gi7DWpxs04ANWHppHbTL2YueraFwhvJY4rOCNxwBHdubccVHUUpBinzbM3mtE21LZLsz7WdkgEImIBg==
+
 vuex@^3.6.2:
   version "3.6.2"
   resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.6.2.tgz#236bc086a870c3ae79946f107f16de59d5895e71"
