@@ -5,20 +5,34 @@
         class="flex flex-wrap justify-center pb-4 md:justify-between md:pb-0 items-center bg-primary pt-4"
       >
         <img src="../static/image/logo_no_bg.png" alt="" width="150" />
-        <button class="md:mr-5 mt-4 md:mt-0 text-white" size="lg">
-          Bem vindo(a), {{ nome }}!
-        </button>
+        <input
+          class="w-1/3 rounded-full focus:outline-none pl-6"
+          type="text"
+          placeholder="Pesquisar..."
+          style="height: 40px"
+        />
+        <a-button class="md:mr-5 mt-4 md:mt-0 text-white" size="lg"
+          >Entrar</a-button
+        >
       </nav>
       <img src="../static/image/wave.png" alt="" width="100%" />
     </header>
     <main class="container m-auto">
-      <h1
-        class="text-4xl text-center md:text-left font-bold text-primary-100 py-4"
-      >
-        Meus pets
+      <h1 class="text-4xl font-bold text-primary-100">
+        Pets procurando um lar
       </h1>
+      <section class="flex flex-wrap pb-6 pt-3">
+        <button
+          class="w-32 mr-4 py-1 text-black border border-gray-500 rounded-lg"
+        >
+          🐶 Cachorro
+        </button>
+        <button class="w-32 text-black border border-gray-500 rounded-lg">
+          🐱 Gato
+        </button>
+      </section>
       <!---->
-      <article class="flex pb-12 flex-wrap justify-center md:justify-start">
+      <article class="flex pb-12">
         <section
           class="w-64 mr-0 mb-4 sm:mr-4 md:mr-16 md:mb-0 text-white"
           style="height: 320px"
@@ -36,7 +50,7 @@
               <section class="pl-2 pb-2 w-full customDetailsBottom">
                 <h1 class="text-2xl textShadow">Doguinho</h1>
                 <p class="pb-2 textShadow">≈ 1 ano</p>
-                <a-button color="secondary" size="sm">Ver detalhes</a-button>
+                <a-button color="secondary" size="sm">Adote-me</a-button>
               </section>
             </section>
           </a-animal-card>
@@ -58,7 +72,7 @@
               <section class="pl-2 pb-2 w-full customDetailsBottom">
                 <h1 class="text-2xl textShadow">Catinha</h1>
                 <p class="pb-2 textShadow">≈ 6 meses</p>
-                <a-button color="secondary" size="sm">Ver detalhes</a-button>
+                <a-button color="secondary" size="sm">Adote-me</a-button>
               </section>
             </section>
           </a-animal-card>
@@ -68,77 +82,77 @@
       <h2
         class="text-4xl text-center md:text-left pb-5 font-bold text-primary-100"
       >
-        Pets adotados
+        ONGs próximas a você
       </h2>
       <article class="flex flex-wrap justify-around">
         <section class="flex py-6">
           <img
-            class="rounded-xl petsadotados"
-            src="https://i.natgeofe.com/n/4f5aaece-3300-41a4-b2a8-ed2708a0a27c/domestic-dog_thumb.jpg"
+            class="rounded-xl"
+            src="https://i.pinimg.com/236x/80/a0/97/80a09701f662a1ac3af18ebf98b6fdba.jpg"
             alt=""
             width="120"
           />
-          <section class="pl-4">
-            <p class="text-xl">Petinho</p>
-            <p class="pb-2">≈ 6 meses <br /></p>
-            <a-button color="secondary" size="sm">Ver detalhes</a-button>
+          <section class="pl-2">
+            <p class="text-xl">Nome Ong</p>
+            <p class="pb-2">
+              Rua das Laranjeiras, 355 <br />
+              Senhor do Bonfim - BA <br />
+            </p>
+            <a-button color="secondary" size="sm">Visite o perfil</a-button>
           </section>
         </section>
         <section class="flex py-6">
           <img
-            class="rounded-xl petsadotados"
-            src="https://www.guidedogs.org/wp-content/uploads/2019/11/website-donate-mobile.jpg"
+            class="rounded-xl"
+            src="https://i.pinimg.com/236x/aa/33/51/aa33517396da6c11ee80129ad9d3f537.jpg"
             alt=""
             width="120"
-            height="120"
           />
-          <section class="pl-4">
-            <p class="text-xl">Fofinho</p>
-            <p class="pb-2">≈ 1 ano <br /></p>
-            <a-button color="secondary" size="sm">Ver detalhes</a-button>
+          <section class="pl-2">
+            <p class="text-xl">Nome Ong</p>
+            <p class="pb-2">
+              Rua das Laranjeiras, 355 <br />
+              Senhor do Bonfim - BA <br />
+            </p>
+            <a-button color="secondary" size="sm">Visite o perfil</a-button>
           </section>
         </section>
         <section class="flex py-6">
           <img
-            class="rounded-xl petsadotados"
-            src="https://i.natgeofe.com/n/867b88cb-b464-4a53-897b-11528bb5d669/01-cat-names-nationalgeographic_1525054.jpg"
+            class="rounded-xl"
+            src="https://png.pngtree.com/png-clipart/20190120/ourlarge/pngtree-dog-cat-pet-shovel-officer-png-image_494987.jpg"
             alt=""
             width="120"
           />
-          <section class="pl-4">
-            <p class="text-xl">Gatito</p>
-            <p class="pb-2">≈ 3 anos <br /></p>
-            <a-button color="secondary" size="sm">Ver detalhes</a-button>
+          <section class="pl-2">
+            <p class="text-xl">Nome Ong</p>
+            <p class="pb-2">
+              Rua das Laranjeiras, 355 <br />
+              Senhor do Bonfim - BA <br />
+            </p>
+            <a-button color="secondary" size="sm">Visite o perfil</a-button>
           </section>
         </section>
         <section class="flex py-6">
           <img
-            class="rounded-xl petsadotados"
-            src="https://images6.fanpop.com/image/photos/41400000/cute-kitties-kitties-41455758-500-460.jpg"
+            class="rounded-xl"
+            src="https://www.ubatuba.sp.gov.br/wp-content/uploads/sites/2/2017/04/0425-adocao-CCZ-ubatuba-logo-770x689.png"
             alt=""
             width="120"
           />
-          <section class="pl-4">
-            <p class="text-xl">Catinha</p>
-            <p class="pb-2">≈ 2 meses <br /></p>
-            <a-button color="secondary" size="sm">Ver detalhes</a-button>
+          <section class="pl-2">
+            <p class="text-xl">Nome Ong</p>
+            <p class="pb-2">
+              Rua das Laranjeiras, 355 <br />
+              Senhor do Bonfim - BA <br />
+            </p>
+            <a-button color="secondary" size="sm">Visite o perfil</a-button>
           </section>
         </section>
       </article>
     </main>
   </div>
 </template>
-
-<script>
-export default {
-  middleware: ['authenticated'],
-  data() {
-    return {
-      nome: 'Ana Maria Fulana da Silva',
-    }
-  },
-}
-</script>
 
 <style>
 .customDetailsUp {
@@ -155,11 +169,5 @@ export default {
 }
 .textShadow {
   text-shadow: 1px 1px 3px #000;
-}
-
-.petsadotados {
-  height: 120px !important;
-  border-radius: 20px;
-  object-fit: cover;
 }
 </style>
