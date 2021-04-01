@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   middleware: ['redirect-dashboard'],
   data() {
@@ -52,12 +52,17 @@ export default {
       },
     }
   },
+  computed: {
+    ...mapGetters({ userHasFinishedProfile: 'user/userHasFinishedProfile' }),
+  },
   methods: {
     ...mapActions({ login: 'user/login' }),
     async handleLogin() {
       try {
         await this.login(this.credentials)
-        this.$router.push('/meus-pets')
+        if (!this.userHasFinishedProfile) {
+          this.$router.push('/completar-perfil')
+        } else this.$router.push('/meus-pets')
       } catch (error) {
         const status = error.response.status
         if (status === 401) {

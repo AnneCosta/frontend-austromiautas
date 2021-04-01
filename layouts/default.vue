@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { mapMutations, mapActions } from 'vuex'
+import { mapMutations, mapActions, mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -24,6 +24,7 @@ export default {
     computedDisabledClasses() {
       return this.loaded === true ? [] : this.disabledPageClasses
     },
+    ...mapGetters({ userHasFinishedProfile: 'user/userHasFinishedProfile' }),
   },
   mounted() {
     this.initialize()
@@ -38,8 +39,12 @@ export default {
           const user = await this.fetchUser()
           this.setUserName(user.name)
           this.setUserEmail(user.email)
+          this.setContacts(user.contacts)
+          this.setAvatar(user.avatar)
           this.$router.push('/meus-pets')
+          await this.checkProfileAndRedirect()
         } catch {
+          this.logout()
           this.$toast.error('Houve um erro ao verificar usuário', {
             position: 'top-center',
           })
@@ -47,14 +52,25 @@ export default {
       }
       this.loaded = true
     },
+
+    checkProfileAndRedirect() {
+      if (!this.userHasFinishedProfile) {
+        this.$router.push('/completar-perfil')
+      }
+    },
+
     ...mapMutations({
       setAccessToken: 'user/setAccessToken',
       setLoginStatus: 'user/setLoginStatus',
       setUserName: 'user/setUserName',
       setUserEmail: 'user/setUserEmail',
+      setContacts: 'user/setContacts',
+      setAvatar: 'user/setAvatar',
     }),
     ...mapActions({
       fetchUser: 'user/fetchUser',
+      fetchContacts: 'user/fetchContacts',
+      logout: 'user/logout',
     }),
   },
 }
