@@ -1,7 +1,9 @@
 <template>
   <div>
     <header>
-      <nav class="flex justify-between items-center bg-primary pt-4">
+      <nav
+        class="flex flex-wrap justify-center pb-4 md:justify-between md:pb-0 items-center bg-primary pt-4"
+      >
         <img src="../static/image/logo_no_bg.png" alt="" width="150" />
         <input
           class="w-1/3 rounded-full focus:outline-none pl-6"
@@ -9,11 +11,13 @@
           placeholder="Pesquisar..."
           style="height: 40px"
         />
-        <a-button class="mr-5" size="lg">Entrar</a-button>
+        <a-button class="md:mr-5 mt-4 md:mt-0 text-white" size="lg"
+          >Entrar</a-button
+        >
       </nav>
       <img src="../static/image/wave.png" alt="" width="100%" />
     </header>
-    <main class="mx-20">
+    <main class="container m-auto">
       <h1 class="text-4xl font-bold text-primary-100">
         Pets procurando um lar
       </h1>
@@ -29,7 +33,10 @@
       </section>
       <!---->
       <article class="flex pb-12">
-        <section class="w-64 mr-16 text-white" style="height: 320px">
+        <section
+          class="w-64 mr-0 mb-4 sm:mr-4 md:mr-16 md:mb-0 text-white"
+          style="height: 320px"
+        >
           <a-animal-card
             bg="https://i.ytimg.com/vi/MPV2METPeJU/maxresdefault.jpg"
           >
@@ -48,7 +55,10 @@
             </section>
           </a-animal-card>
         </section>
-        <section class="w-64 mr-16 text-white" style="height: 320px">
+        <section
+          class="w-64 mr-0 mb-4 sm:mr-4 md:mr-16 md:mb-0 text-white"
+          style="height: 320px"
+        >
           <a-animal-card
             bg="https://timesofindia.indiatimes.com/photo/67586673.cms"
           >
@@ -69,7 +79,9 @@
         </section>
       </article>
       <!---->
-      <h2 class="text-4xl pb-5 font-bold text-primary-100">
+      <h2
+        class="text-4xl text-center md:text-left pb-5 font-bold text-primary-100"
+      >
         ONGs próximas a você
       </h2>
       <article class="flex flex-wrap justify-around">
