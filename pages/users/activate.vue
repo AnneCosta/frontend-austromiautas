@@ -77,8 +77,6 @@ export default {
         this.status = 'activated'
       } catch (error) {
         this.status = 'error'
-        console.log(error.response.status)
-        console.log(error.response.data)
       }
     },
   },

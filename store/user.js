@@ -1,6 +1,8 @@
 export const state = () => ({
   name: '',
   email: '',
+  contacts: [],
+  avatar: null,
   accessToken: '',
   isLoggedIn: false,
 })
@@ -19,11 +21,75 @@ export const mutations = {
   setLoginStatus(state, status) {
     state.isLoggedIn = status
   },
+
+  setContacts(state, contacts) {
+    state.contacts = contacts
+  },
+
+  setAvatar(state, avatar) {
+    state.avatar = avatar
+  },
+}
+
+export const getters = {
+  userHasWhatsappContacts(state) {
+    return state.contacts.filter(({ type }) => type === 'whatsapp').length > 0
+  },
+  userHasFinishedProfile(state) {
+    return state.contacts.filter(({ type }) => type === 'whatsapp').length > 0
+  },
+  getAvatar(state) {
+    return state.avatar
+  },
 }
 
 export const actions = {
-  fetchUser({ state }) {
-    return this.$axios.$get('/donators', {
+  async fetchUser({ state, dispatch }) {
+    const user = await this.$axios.$get('/donators', {
+      headers: {
+        authorization: `Bearer ${state.accessToken}`,
+      },
+    })
+    const contacts = await dispatch('fetchContacts')
+    return { ...user, contacts }
+  },
+
+  async uploadAvatar({ state, commit }, avatar) {
+    const { path } = await this.$axios.$post('/donators/avatar', avatar, {
+      headers: {
+        authorization: `Bearer ${state.accessToken}`,
+      },
+    })
+    commit('setAvatar', path)
+    return path
+  },
+
+  registerContact({ state }, contact) {
+    return this.$axios.$post('/donators/contacts ', contact, {
+      headers: {
+        authorization: `Bearer ${state.accessToken}`,
+      },
+    })
+  },
+
+  fetchContacts({ state }) {
+    return this.$axios.$get('/donators/contacts', {
+      headers: {
+        authorization: `Bearer ${state.accessToken}`,
+      },
+    })
+  },
+
+  fetchPets(ctx) {
+    return this.$axios.$get('/pets')
+  },
+
+  fetchPet(ctx, petId) {
+    return this.$axios.$get(`/pets/${petId}`)
+  },
+
+  registerPets({ state }, pets) {
+    return this.$axios.$post('/pets', pets, {
       headers: {
         authorization: `Bearer ${state.accessToken}`,
       },
@@ -40,11 +106,15 @@ export const actions = {
 
   async login({ commit, dispatch }, user) {
     const { accessToken } = await this.$axios.$post('/auth/login', user)
-    const { name, email } = await dispatch('fetchUser')
+
     commit('setAccessToken', accessToken)
     commit('setLoginStatus', true)
+    const { name, email, avatar } = await dispatch('fetchUser')
     commit('setUserName', name)
     commit('setUserEmail', email)
+    commit('setAvatar', avatar)
+    const contacts = await dispatch('fetchContacts')
+    commit('setContacts', contacts)
     localStorage.setItem('token', accessToken)
     return { accessToken }
   },
@@ -54,6 +124,7 @@ export const actions = {
     commit('setLoginStatus', false)
     commit('setUserName', '')
     commit('setUserEmail', '')
+    commit('setContacts', [])
     localStorage.removeItem('token')
   },
 }

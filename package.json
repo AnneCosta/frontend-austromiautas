@@ -17,6 +17,8 @@
     "core-js": "^3.8.3",
     "nuxt": "^2.14.12",
     "vueperslides": "^2.13.0",
+    "vue-stepper": "^1.4.2",
+    "vue-stepper-component": "^1.0.0",
     "vuex": "^3.6.2"
   },
   "devDependencies": {

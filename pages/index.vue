@@ -102,9 +102,7 @@ export default {
   computed: {
     ...mapState({ user: 'user' }),
   },
-  mounted() {
-    console.log(this.user)
-  },
+
   methods: {
     ...mapActions({ logout: 'user/logout' }),
   },

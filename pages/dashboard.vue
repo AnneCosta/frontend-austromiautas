@@ -5,12 +5,12 @@
         class="flex flex-wrap justify-center pb-4 md:justify-between md:pb-0 items-center bg-primary pt-4"
       >
         <img src="../static/image/logo_no_bg.png" alt="" width="150" />
-        <input
+        <!-- <input
           class="w-1/3 rounded-full focus:outline-none pl-6"
           type="text"
           placeholder="Pesquisar..."
           style="height: 40px"
-        />
+        /> -->
         <a-button class="md:mr-5 mt-4 md:mt-0 text-white" size="lg"
           >Entrar</a-button
         >
@@ -153,6 +153,42 @@
     </main>
   </div>
 </template>
+
+<script>
+import { mapActions, mapState } from 'vuex'
+export default {
+  middleware: ['authenticated'],
+  data() {
+    return {
+      pets: [],
+      dropdownOpen: false,
+    }
+  },
+
+  computed: {
+    ...mapState({ user: 'user' }),
+  },
+
+  mounted() {
+    this.handleFetchPets()
+  },
+
+  methods: {
+    ...mapActions({ fetchPets: 'user/fetchPets' }),
+
+    async handleFetchPets() {
+      try {
+        const pets = await this.fetchPets()
+        this.pets = pets
+      } catch (error) {
+        this.$toast.error('Houve um erro ao buscar animais', {
+          position: 'top-center',
+        })
+      }
+    },
+  },
+}
+</script>
 
 <style>
 .customDetailsUp {

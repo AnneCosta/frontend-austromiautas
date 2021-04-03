@@ -166,7 +166,7 @@ export default {
   computed: {
     computedState() {
       if (this.hasFocus === true) return 'focus'
-      if (this.$attrs.value.length > 0) return 'filled'
+      if (this.$attrs.value?.length > 0) return 'filled'
       return 'blur'
     },
 

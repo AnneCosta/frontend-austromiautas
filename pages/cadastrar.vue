@@ -29,7 +29,7 @@
                   value="cnpj"
                   type="radio"
                 />
-                <label class="text-primary font-thin" for="cpf"
+                <label class="text-primary font-thin" for="cnpj"
                   >Pessoa Jurídica</label
                 >
               </div>
