@@ -107,7 +107,7 @@
               {{ pet.extraInformations }}
             </p>
           </section>
-          <nuxt-link to="/confirmar-dados">
+          <nuxt-link :to="`/confirmar-dados/${$route.params.id}`">
             <a-button fluid size="md" class="w-full my-6">Adote-me</a-button>
           </nuxt-link>
         </section>

@@ -41,13 +41,9 @@ export default {
           this.setUserEmail(user.email)
           this.setContacts(user.contacts)
           this.setAvatar(user.avatar)
-          this.$router.push('/meus-pets')
           await this.checkProfileAndRedirect()
         } catch {
           this.logout()
-          this.$toast.error('Houve um erro ao verificar usuário', {
-            position: 'top-center',
-          })
         }
       }
       this.loaded = true
