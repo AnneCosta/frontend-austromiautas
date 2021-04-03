@@ -186,6 +186,12 @@ export default {
 
   computed: {
     ...mapState({ user: 'user' }),
+    filteredInProgressPets() {
+      return this.pets.filter((pet) => pet.adoptionStatus === 'in progress')
+    },
+    filteredAdoptedPets() {
+      return this.pets.filter((pet) => pet.adoptionStatus === 'adopted')
+    },
   },
 
   mounted() {
@@ -214,6 +220,18 @@ export default {
         this.pets = pets
       } catch (error) {
         console.log(error.response)
+      }
+    },
+
+    handleConfirmAdoptin() {
+      return (id) => {
+        //
+      }
+    },
+
+    handleRejectAdoption() {
+      return (id) => {
+        //
       }
     },
   },
