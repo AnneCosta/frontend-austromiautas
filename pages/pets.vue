@@ -24,14 +24,20 @@
         Pets procurando um lar
       </h1>
       <section class="flex flex-wrap pb-6 pt-3">
-        <button
-          class="w-32 mr-4 py-1 text-black border border-gray-500 rounded-lg"
-        >
-          🐶 Cachorro
-        </button>
-        <button class="w-32 text-black border border-gray-500 rounded-lg">
-          🐱 Gato
-        </button>
+        <nuxt-link to="/listar-pets">
+          <button
+            class="w-32 mr-4 py-1 text-black border border-gray-500 rounded-lg"
+          >
+            🐶 Cachorro
+          </button>
+        </nuxt-link>
+        <nuxt-link to="/listar-pets">
+          <button
+            class="w-32 py-1 text-black border border-gray-500 rounded-lg"
+          >
+            🐱 Gato
+          </button>
+        </nuxt-link>
       </section>
       <!---->
       <article class="flex pb-12 flex-wrap justify-center md:justify-start">

@@ -63,9 +63,6 @@
     <main class="container m-auto mb-16">
       <h1 class="text-3xl font-bold text-center my-4">Detalhes do pet</h1>
       <section class="w-full flex flex-col flex-wrap items-center m-auto mt-5">
-        <nuxt-link :to="'/editar-pet/' + pet.id">
-          <button>Editar</button>
-        </nuxt-link>
         <section class="flex justify-center mx-2 md:w-1/2 md:mx-0">
           <img
             class="object-cover w-full rounded-3xl"
@@ -110,7 +107,7 @@
               {{ pet.extraInformations }}
             </p>
           </section>
-          <nuxt-link :to="'/detalhes-pet/' + pet.id + '/confirmar-dados'">
+          <nuxt-link to="/confirmar-dados">
             <a-button fluid size="md" class="w-full my-6">Adote-me</a-button>
           </nuxt-link>
         </section>
