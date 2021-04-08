@@ -4,7 +4,7 @@
       <nav
         class="flex flex-wrap justify-center pb-4 md:justify-between md:pb-0 items-center bg-primary pt-4"
       >
-        <img src="../static/image/logo_no_bg.png" alt="" width="150" />
+        <img src="/image/logo_no_bg.png" alt="" width="150" />
         <span v-if="user.isLoggedIn" class="md:mr-5 mt-4 md:mt-0 text-white">
           <div class="flex justify-center">
             <div class="relative">
@@ -53,7 +53,7 @@
           </div>
         </span>
       </nav>
-      <img src="../static/image/wave.png" alt="" width="100%" />
+      <img src="/image/wave.png" alt="" width="100%" />
     </header>
     <main v-if="pets" class="container m-auto">
       <section class="flex justify-between items-center">
@@ -128,46 +128,6 @@
             </section>
           </section>
         </section>
-        <!-- <section class="flex py-6">
-          <img
-            class="rounded-xl petsadotados"
-            src="https://www.guidedogs.org/wp-content/uploads/2019/11/website-donate-mobile.jpg"
-            alt=""
-            width="120"
-            height="120"
-          />
-          <section class="pl-4">
-            <p class="text-xl">Fofinho</p>
-            <p class="pb-2">≈ 1 ano <br /></p>
-            <a-button color="secondary" size="sm">Ver detalhes</a-button>
-          </section>
-        </section>
-        <section class="flex py-6">
-          <img
-            class="rounded-xl petsadotados"
-            src="https://i.natgeofe.com/n/867b88cb-b464-4a53-897b-11528bb5d669/01-cat-names-nationalgeographic_1525054.jpg"
-            alt=""
-            width="120"
-          />
-          <section class="pl-4">
-            <p class="text-xl">Gatito</p>
-            <p class="pb-2">≈ 3 anos <br /></p>
-            <a-button color="secondary" size="sm">Ver detalhes</a-button>
-          </section>
-        </section>
-        <section class="flex py-6">
-          <img
-            class="rounded-xl petsadotados"
-            src="https://images6.fanpop.com/image/photos/41400000/cute-kitties-kitties-41455758-500-460.jpg"
-            alt=""
-            width="120"
-          />
-          <section class="pl-4">
-            <p class="text-xl">Catinha</p>
-            <p class="pb-2">≈ 2 meses <br /></p>
-            <a-button color="secondary" size="sm">Ver detalhes</a-button>
-          </section>
-        </section> -->
       </article>
     </main>
   </div>

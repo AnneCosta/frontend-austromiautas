@@ -4,7 +4,7 @@
       <nav
         class="flex flex-wrap justify-center pb-4 md:justify-between md:pb-0 items-center bg-primary pt-4"
       >
-        <img src="../../static/image/logo_no_bg.png" alt="" width="150" />
+        <img src="/image/logo_no_bg.png" alt="" width="150" />
         <nuxt-link v-if="!user.isLoggedIn" to="/entrar">
           <a-button class="md:mr-5 mt-4 md:mt-0 text-white" size="lg">
             Entrar
@@ -58,7 +58,7 @@
           </div>
         </span>
       </nav>
-      <img src="../../static/image/wave.png" alt="" width="100%" />
+      <img src="/image/wave.png" alt="" width="100%" />
     </header>
     <main class="container m-auto mb-16">
       <h1 class="text-3xl font-bold text-center my-4">Detalhes do pet</h1>
