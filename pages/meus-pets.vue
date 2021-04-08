@@ -68,12 +68,9 @@
       </section>
       <!---->
       <article class="flex pb-12 flex-wrap justify-center md:justify-start">
-        <p v-if="!pets">
-          Ops, parece que você não cadastrou nenhum animal ainda
-        </p>
         <div v-for="pet in pets" :key="pet.id">
           <section
-            class="w-64 mr-0 mb-4 sm:mr-4 md:mr-16 md:mb-0 text-white"
+            class="w-64 mr-0 mb-4 my-4 sm:mr-4 md:mr-16 md:mb-0 text-white"
             style="height: 320px"
           >
             <a-animal-card bg="https://i.imgur.com/VmCQnLK.png">
@@ -84,19 +81,39 @@
                 <p v-if="pet.gender == 'male'" class="text-4xl textShadow">
                   &#9794;
                 </p>
-                <p v-if="pet.gender == 'female'" class="text-4xl textShadow">
-                  &#9792;
-                </p>
+                <p v-else class="text-4xl textShadow">&#9792;</p>
               </section>
               <section class="flex items-end" style="height: 50%">
                 <section class="pl-2 pb-2 w-full customDetailsBottom">
                   <h1 class="text-2xl textShadow">{{ pet.name }}</h1>
                   <p class="pb-2 textShadow">≈ {{ pet.approximatedAge }}</p>
-                  <nuxt-link :to="'/detalhes-pet/' + pet.id">
-                    <a-button color="secondary" size="sm"
-                      >Ver detalhes</a-button
+                  <section class="flex justify-between">
+                    <section>
+                      <nuxt-link :to="'/detalhes-pet/' + pet.id">
+                        <a-button color="secondary" size="sm"
+                          >Ver detalhes</a-button
+                        >
+                      </nuxt-link>
+                    </section>
+                    <section
+                      v-if="pet.adoptionStatus == 'in_progress'"
+                      class="mr-2"
                     >
-                  </nuxt-link>
+                      <a-button
+                        color="success"
+                        size="sm"
+                        @click="handleConfirmAdoption(pet.id)"
+                        >v</a-button
+                      >
+
+                      <a-button
+                        color="danger"
+                        size="sm"
+                        @click="handleRejectAdoption"
+                        >x</a-button
+                      >
+                    </section>
+                  </section>
                 </section>
               </section>
             </a-animal-card>
@@ -105,14 +122,14 @@
       </article>
       <!---->
       <h2
-        v-if="pets.adoptionStatus"
+        v-if="pets.adoptionStatus == 'adopted'"
         class="text-4xl text-center md:text-left pb-5 font-bold text-primary-100"
       >
         Pets adotados
       </h2>
       <article v-if="pets" class="flex flex-wrap justify-around">
         <section v-for="pet in pets" :key="pet.id">
-          <section v-if="pet.adoptionStatus != 'waiting'" class="flex py-6">
+          <section v-if="pet.adoptionStatus == 'adopted'" class="flex py-6">
             <img
               class="rounded-xl petsadotados"
               src="https://i.natgeofe.com/n/4f5aaece-3300-41a4-b2a8-ed2708a0a27c/domestic-dog_thumb.jpg"
@@ -159,18 +176,23 @@ export default {
   },
 
   methods: {
-    ...mapActions({ logout: 'user/logout', fetchPets: 'user/fetchPets' }),
+    ...mapActions({
+      logout: 'user/logout',
+      fetchPets: 'user/fetchPets',
+      confirmAdopt: 'user/petAdoptAccept',
+      rejectAdopt: 'user/petAdoptRefuse',
+    }),
 
     handleLogout() {
       try {
         this.logout(this.user)
         this.$router.push('/entrar')
       } catch (error) {
-        const status = error.response.status
-        console.log(status)
         this.$toast.error('Houve um erro ao deslogar', {
           position: 'top-center',
         })
+      } finally {
+        setTimeout(() => this.$toast.clear(), 7000)
       }
     },
 
@@ -179,13 +201,26 @@ export default {
         const pets = await this.fetchPets()
         this.pets = pets
       } catch (error) {
-        console.log(error.response)
+        this.$toast.error('Houve um erro ao buscar pets', {
+          position: 'top-center',
+        })
+      } finally {
+        setTimeout(() => this.$toast.clear(), 7000)
       }
     },
 
-    handleConfirmAdoptin() {
-      return (id) => {
-        //
+    handleConfirmAdoption(petId) {
+      try {
+        const confirm = this.confirmAdopt(petId)
+        this.confirm = confirm
+        console.log(confirm)
+      } catch (error) {
+        console.log(error.response)
+        this.$toast.error('Houve um erro ao confirmar adoção', {
+          position: 'top-center',
+        })
+      } finally {
+        setTimeout(() => this.$toast.clear(), 7000)
       }
     },
 

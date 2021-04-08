@@ -96,6 +96,22 @@ export const actions = {
     })
   },
 
+  petAdopt(ctx, { petId, formInfo }) {
+    return this.$axios.$post(`/pets/${petId}/adopt`, formInfo)
+  },
+
+  petAdoptAccept({ state }, petId) {
+    return this.$axios.$put(`/pets/${petId}/adopt/confirm`, {
+      headers: {
+        authorization: `Bearer ${state.accessToken}`,
+      },
+    })
+  },
+
+  petAdoptRefuse(ctx, petId) {
+    return this.$axios.$put(`/pets/${petId}/adopt/confirm`)
+  },
+
   register(ctx, user) {
     return this.$axios.$post('/donators', user)
   },

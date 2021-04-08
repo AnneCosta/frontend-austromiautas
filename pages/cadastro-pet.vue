@@ -233,11 +233,9 @@ export default {
         await this.registerPets(this.newPet)
         this.$router.push('/meus-pets')
       } catch (error) {
-        const statusCode = error.response.data
         this.$toast.error('Houve problemas no cadastro', {
           position: 'top-center',
         })
-        console.log(statusCode)
       } finally {
         setTimeout(() => this.$toast.clear(), 7000)
       }

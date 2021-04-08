@@ -20,15 +20,15 @@
       <section class="mx-4 md:mx-auto md:w-1/2">
         <form>
           <section>
-            <a-input v-model="adopter.name" label="Nome completo" />
+            <a-input v-model="adopter.adopterName" label="Nome completo" />
           </section>
           <section>
-            <a-input v-model="adopter.cpf" label="CPF" />
+            <a-input v-model="adopter.adopterCPF" label="CPF" />
           </section>
           <section class="my-8">
             <a-input
               id="birth"
-              v-model="adopter.birth"
+              v-model="adopter.adopterBirth"
               label="Data de nascimento"
               type="date"
               elevate-label
@@ -38,8 +38,9 @@
           <a-button
             class="mb-4 md:mb-0 w-full my-4"
             fluid
+            :disabled="!formIsValid"
             size="md"
-            @click="handleAdopt"
+            @click.prevent="handleAdopt()"
           >
             Confirmar adoção
           </a-button>
@@ -50,19 +51,44 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   data() {
     return {
       adopter: {
-        name: '',
-        cpf: '',
-        birth: null,
+        adopterName: '',
+        adopterCPF: '',
+        adopterBirth: null,
       },
     }
   },
+  computed: {
+    formIsValid() {
+      if (
+        this.adopter.adopterName &&
+        this.adopter.adopterCPF &&
+        this.adopter.adopterBirth
+      ) {
+        return true
+      }
+      return false
+    },
+  },
   methods: {
-    handleAdopt() {
-      //
+    ...mapActions({ petAdopt: 'user/fetchPetAdopt' }),
+    async handleAdopt() {
+      try {
+        await this.petAdopt({
+          petId: this.$route.params.id,
+          formInfo: this.adopter,
+        })
+        this.$toast.success('')
+        this.$router.push('/pets')
+      } catch (error) {
+        this.$toast.error('Houve um erro ao adotar', { position: 'top-center' })
+      } finally {
+        setTimeout(() => this.$toast.clear(), 7000)
+      }
     },
   },
 }

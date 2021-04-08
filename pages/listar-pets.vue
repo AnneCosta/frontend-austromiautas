@@ -83,7 +83,11 @@ export default {
         const pets = await this.fetchPets()
         this.pets = pets
       } catch (error) {
-        console.log(error.response)
+        this.$toast.error('Houve um erro ao buscar pets', {
+          position: 'top-center',
+        })
+      } finally {
+        setTimeout(() => this.$toast.clear(), 7000)
       }
     },
   },

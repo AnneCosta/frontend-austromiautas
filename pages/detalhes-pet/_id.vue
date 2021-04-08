@@ -4,7 +4,9 @@
       <nav
         class="flex flex-wrap justify-center pb-4 md:justify-between md:pb-0 items-center bg-primary pt-4"
       >
-        <img src="/image/logo_no_bg.png" alt="" width="150" />
+        <nuxt-link to="/meus-pets">
+          <img src="/image/logo_no_bg.png" alt="" width="150" />
+        </nuxt-link>
         <nuxt-link v-if="!user.isLoggedIn" to="/entrar">
           <a-button class="md:mr-5 mt-4 md:mt-0 text-white" size="lg">
             Entrar
@@ -142,14 +144,17 @@ export default {
     ...mapActions({
       fetchPet: 'user/fetchPet',
       logout: 'user/logout',
-      adoptPet: 'user/adoptPet',
     }),
     async handleFetchPet() {
       try {
         const pet = await this.fetchPet(this.$route.params.id)
         this.pet = pet
       } catch (error) {
-        console.log(error.response)
+        this.$toast.error('Houve um erro ao buscar pet', {
+          position: 'top-center',
+        })
+      } finally {
+        setTimeout(() => this.$toast.clear(), 7000)
       }
     },
     handleLogout() {
@@ -157,11 +162,12 @@ export default {
         this.logout(this.user)
         this.$router.push('/entrar')
       } catch (error) {
-        console.log(error.response)
         this.$toast.error('Houve um erro ao deslogar', {
           position: 'top-center',
         })
         this.$router.push('/')
+      } finally {
+        setTimeout(() => this.$toast.clear(), 7000)
       }
     },
   },
