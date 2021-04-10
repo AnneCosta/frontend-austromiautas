@@ -64,7 +64,11 @@
       </h1>
       <section class="mx-4 md:mx-auto md:w-1/2">
         <form @submit.prevent="handleRegisterPet">
-          <a-input v-model="newPet.name" label="Nome do pet" />
+          <a-input
+            v-model="newPet.name"
+            :elevate-label="!!newPet.name"
+            label="Nome do pet"
+          />
           <section class="flex justify-between flex-wrap">
             <section class="w-full my-2 md:w-1/2">
               <p class="text-lg mb-2 text-gray-800">Tipo de pet</p>
@@ -77,6 +81,7 @@
                     name="type"
                     value="dog"
                     type="radio"
+                    elevate-label
                   />
                   <label class="mr-4" for="dog">Cachorro</label>
                 </div>
@@ -176,7 +181,11 @@
             </section>
           </section>
           <section class="flex"></section>
-          <a-input v-model="newPet.approximatedAge" label="Idade aproximada" />
+          <a-input
+            v-model="newPet.approximatedAge"
+            :elevaet-label="!!newPet.approximatedAge"
+            label="Idade aproximada"
+          />
           <textarea
             id="adoptreason"
             v-model="newPet.adoptionReason"
@@ -227,13 +236,26 @@ export default {
   },
 
   methods: {
-    ...mapActions({ registerPets: 'user/registerPets' }),
+    ...mapActions({ registerPets: 'user/registerPets', logout: 'user/logout' }),
     async handleRegisterPet() {
       try {
         await this.registerPets(this.newPet)
         this.$router.push('/meus-pets')
       } catch (error) {
         this.$toast.error('Houve problemas no cadastro', {
+          position: 'top-center',
+        })
+      } finally {
+        setTimeout(() => this.$toast.clear(), 7000)
+      }
+    },
+
+    handleLogout() {
+      try {
+        this.logout(this.user)
+        this.$router.push('/entrar')
+      } catch (error) {
+        this.$toast.error('Houve um erro ao deslogar', {
           position: 'top-center',
         })
       } finally {

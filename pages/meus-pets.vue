@@ -271,6 +271,7 @@ export default {
       try {
         this.confirmAdopt(petId)
         this.$toast.success('Adoção confirmada!', { position: 'top-center' })
+        this.handleFetchPets()
       } catch (error) {
         this.$toast.error('Houve um erro ao confirmar adoção', {
           position: 'top-center',

@@ -82,7 +82,11 @@
         <section class="flex justify-center mx-2 md:w-1/2 md:mx-0">
           <img
             class="object-cover w-full rounded-3xl"
-            src="https://i.imgur.com/VmCQnLK.png"
+            :src="
+              pet.avatar
+                ? `http://localhost:3001/static/images/${pet.avatar}`
+                : 'https://i.imgur.com/VmCQnLK.png'
+            "
             alt=""
             style="height: 500px"
           />

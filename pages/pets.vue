@@ -47,7 +47,13 @@
             class="w-64 mr-0 mb-4 my-4 sm:mr-4 md:mr-16 md:mb-0 text-white"
             style="height: 320px"
           >
-            <a-animal-card bg="https://i.imgur.com/VmCQnLK.png">
+            <a-animal-card
+              :bg="
+                pet.avatar
+                  ? `http://localhost:3001/static/images/${pet.avatar}`
+                  : 'https://i.imgur.com/VmCQnLK.png'
+              "
+            >
               <section
                 class="flex justify-end pr-4 customDetailsUp"
                 style="height: 50%"
