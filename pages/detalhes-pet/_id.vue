@@ -51,7 +51,7 @@
               >
                 <button
                   class="block w-full text-left px-4 py-2 text-sm capitalize text-gray-700 hover:bg-secondary-100 hover:text-white"
-                  @click="handleLogout()"
+                  @click="handleLogout"
                 >
                   Sair
                 </button>
@@ -63,8 +63,22 @@
       <img src="/image/wave.png" alt="" width="100%" />
     </header>
     <main class="container m-auto mb-16">
-      <h1 class="text-3xl font-bold text-center my-4">Detalhes do pet</h1>
       <section class="w-full flex flex-col flex-wrap items-center m-auto mt-5">
+        <section class="flex justify-between mx-2 md:w-1/2 md:mx-0">
+          <h1 class="text-3xl font-bold text-center my-4">Detalhes do pet</h1>
+          <nuxt-link
+            v-if="user.isLoggedIn"
+            class="flex items-center"
+            :to="`/edit-pet/${pet.id}`"
+          >
+            <button
+              size="sm"
+              class="text-lg my-4 hover:underline hover:text-secondary"
+            >
+              Editar
+            </button>
+          </nuxt-link>
+        </section>
         <section class="flex justify-center mx-2 md:w-1/2 md:mx-0">
           <img
             class="object-cover w-full rounded-3xl"
@@ -81,21 +95,19 @@
             <section class="flex">
               <p class="text-3xl mr-2">≈ {{ pet.approximatedAge }}</p>
               <p v-if="pet.gender == 'male'" class="text-3xl">&#9794;</p>
-              <p v-if="pet.gender == 'female'" class="text-3xl">&#9792;</p>
+              <p v-else class="text-3xl">&#9792;</p>
             </section>
           </section>
           <section class="text-center my-2">
             <p>
               <span v-if="pet.type == 'dog'" class="text-2xl">Cachorro</span>
-              <span v-if="pet.type == 'cat'" class="text-2xl">Gato</span>
+              <span v-else class="text-2xl">Gato</span>
               <span class="text-2xl mx-2">•</span>
               <span v-if="pet.isCastrated" class="text-2xl">Castrado</span>
-              <span v-if="!pet.isCastrated" class="text-2xl">Não castrado</span>
+              <span v-else class="text-2xl">Não castrado</span>
               <span class="text-2xl mx-2">•</span>
               <span v-if="pet.isVaccinated" class="text-2xl">Vacinado</span>
-              <span v-if="!pet.isVaccinated" class="text-2xl">
-                Não vacinado
-              </span>
+              <span v-else class="text-2xl"> Não vacinado </span>
             </p>
           </section>
           <section>

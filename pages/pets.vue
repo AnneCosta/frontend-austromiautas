@@ -43,6 +43,7 @@
       <article class="flex pb-12 flex-wrap justify-center md:justify-start">
         <div v-for="pet in pets" :key="pet.id">
           <section
+            v-if="pet.adoptionStatus == 'waiting'"
             class="w-64 mr-0 mb-4 my-4 sm:mr-4 md:mr-16 md:mb-0 text-white"
             style="height: 320px"
           >

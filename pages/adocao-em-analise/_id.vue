@@ -23,7 +23,7 @@
         <p>
           Pedimos que você entre em contato com o doador para que seja possível
           prosseguir com a adoção e você possa levar o seu pet pra casa. O
-          número que você pode entrar em contato é: {{ user.contact }}
+          número que você pode entrar em contato é: {{ user.name }} !
         </p>
       </section>
     </main>
@@ -33,21 +33,8 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 export default {
-  middleware: ['authenticated'],
   data() {
-    return {
-      dropdownOpen: false,
-      newPet: {
-        name: '',
-        type: '',
-        gender: '',
-        isCastrated: true,
-        isVaccinated: true,
-        approximatedAge: '',
-        adoptionReason: '',
-        extraInformations: '',
-      },
-    }
+    return {}
   },
 
   computed: {
@@ -55,7 +42,10 @@ export default {
   },
 
   methods: {
-    ...mapActions({ registerPets: 'user/registerPets' }),
+    ...mapActions({
+      registerPets: 'user/registerPets',
+      donator: 'user/fetchGetDonators',
+    }),
     async handleRegisterPet() {
       try {
         await this.registerPets(this.newPet)

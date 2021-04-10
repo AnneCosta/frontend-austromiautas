@@ -44,7 +44,7 @@
               >
                 <button
                   class="block w-full text-left px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white"
-                  @click="handleLogout()"
+                  @click="handleLogout"
                 >
                   Sair
                 </button>

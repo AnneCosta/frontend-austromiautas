@@ -80,6 +80,16 @@ export const actions = {
     })
   },
 
+  fetchGetContacts(ctx) {
+    return this.$axios.$get('/donators/contacts')
+  },
+
+  async fetchGetDonators(ctx, { dispatch }) {
+    const user = await this.$axios.$get('/donators')
+    const contacts = await dispatch('fetchContacts')
+    return { user, contacts }
+  },
+
   fetchPets(ctx) {
     return this.$axios.$get('/pets')
   },
@@ -96,20 +106,40 @@ export const actions = {
     })
   },
 
-  petAdopt(ctx, { petId, formInfo }) {
-    return this.$axios.$post(`/pets/${petId}/adopt`, formInfo)
-  },
-
-  petAdoptAccept({ state }, petId) {
-    return this.$axios.$put(`/pets/${petId}/adopt/confirm`, {
+  updatePet({ state }, { petId, formInfo }) {
+    return this.$axios.$put(`/pets/${petId}`, formInfo, {
       headers: {
         authorization: `Bearer ${state.accessToken}`,
       },
     })
   },
 
-  petAdoptRefuse(ctx, petId) {
-    return this.$axios.$put(`/pets/${petId}/adopt/confirm`)
+  async uploadPetAvatar({ state }, { petId, avatar }) {
+    return await this.$axios.$put(`/pets/${petId}/avatar`, avatar, {
+      headers: {
+        authorization: `Bearer ${state.accessToken}`,
+      },
+    })
+  },
+
+  petAdopt(ctx, { petId, formInfo }) {
+    return this.$axios.$post(`/pets/${petId}/adopt`, formInfo)
+  },
+
+  petAdoptAccept({ state }, petId) {
+    return this.$axios.$put(`/pets/${petId}/adopt/confirm`, undefined, {
+      headers: {
+        authorization: `Bearer ${state.accessToken}`,
+      },
+    })
+  },
+
+  petAdoptRefuse({ state }, petId) {
+    return this.$axios.$put(`/pets/${petId}/adopt/reject`, undefined, {
+      headers: {
+        authorization: `Bearer ${state.accessToken}`,
+      },
+    })
   },
 
   register(ctx, user) {

@@ -44,7 +44,7 @@
               >
                 <button
                   class="block w-full text-left px-4 py-2 text-sm capitalize text-gray-700 hover:bg-secondary-100 hover:text-white"
-                  @click="handleLogout()"
+                  @click="handleLogout"
                 >
                   Sair
                 </button>
@@ -70,6 +70,10 @@
       <article class="flex pb-12 flex-wrap justify-center md:justify-start">
         <div v-for="pet in pets" :key="pet.id">
           <section
+            v-if="
+              pet.adoptionStatus == 'waiting' ||
+              pet.adoptionStatus == 'in_progress'
+            "
             class="w-64 mr-0 mb-4 my-4 sm:mr-4 md:mr-16 md:mb-0 text-white"
             style="height: 320px"
           >
@@ -109,7 +113,7 @@
                       <a-button
                         color="danger"
                         size="sm"
-                        @click="handleRejectAdoption"
+                        @click="handleRejectAdoption(pet.id)"
                         >x</a-button
                       >
                     </section>
@@ -122,26 +126,61 @@
       </article>
       <!---->
       <h2
-        v-if="pets.adoptionStatus == 'adopted'"
         class="text-4xl text-center md:text-left pb-5 font-bold text-primary-100"
       >
         Pets adotados
       </h2>
-      <article v-if="pets" class="flex flex-wrap justify-around">
+      <article class="flex flex-wrap">
         <section v-for="pet in pets" :key="pet.id">
           <section v-if="pet.adoptionStatus == 'adopted'" class="flex py-6">
-            <img
-              class="rounded-xl petsadotados"
-              src="https://i.natgeofe.com/n/4f5aaece-3300-41a4-b2a8-ed2708a0a27c/domestic-dog_thumb.jpg"
-              alt=""
-              width="120"
-            />
-            <section class="pl-4">
-              <p class="text-xl">{{ pet.name }}</p>
-              <p class="pb-2">≈ {{ pet.approximatedAge }} <br /></p>
-              <nuxt-link :to="'/detalhes-pet/' + pet.id">
-                <a-button color="secondary" size="sm">Ver detalhes</a-button>
-              </nuxt-link>
+            <section
+              class="w-48 mr-0 mb-4 md:my-2 sm:mr-4 md:mr-16 md:mb-0 text-white"
+              style="height: 220px"
+            >
+              <a-animal-card bg="https://i.imgur.com/VmCQnLK.png">
+                <section
+                  class="flex justify-end pr-4 customDetailsUp"
+                  style="height: 50%"
+                >
+                  <p v-if="pet.gender == 'male'" class="text-4xl textShadow">
+                    &#9794;
+                  </p>
+                  <p v-else class="text-4xl textShadow">&#9792;</p>
+                </section>
+                <section class="flex items-end" style="height: 50%">
+                  <section class="pl-2 pb-2 w-full customDetailsBottom">
+                    <h1 class="text-2xl textShadow">{{ pet.name }}</h1>
+                    <p class="pb-2 textShadow">≈ {{ pet.approximatedAge }}</p>
+                    <section class="flex justify-between">
+                      <section>
+                        <nuxt-link :to="'/detalhes-pet/' + pet.id">
+                          <a-button color="secondary" size="sm"
+                            >Ver detalhes</a-button
+                          >
+                        </nuxt-link>
+                      </section>
+                      <section
+                        v-if="pet.adoptionStatus == 'in_progress'"
+                        class="mr-2"
+                      >
+                        <a-button
+                          color="success"
+                          size="sm"
+                          @click="handleConfirmAdoption(pet.id)"
+                          >v</a-button
+                        >
+
+                        <a-button
+                          color="danger"
+                          size="sm"
+                          @click="handleRejectAdoption(pet.id)"
+                          >x</a-button
+                        >
+                      </section>
+                    </section>
+                  </section>
+                </section>
+              </a-animal-card>
             </section>
           </section>
         </section>
@@ -208,14 +247,19 @@ export default {
         setTimeout(() => this.$toast.clear(), 7000)
       }
     },
+    getPetImage(img) {
+      if (img == null) {
+        return 'https://i.imgur.com/VmCQnLK.png'
+      } else {
+        return `/static/image/${img}`
+      }
+    },
 
     handleConfirmAdoption(petId) {
       try {
-        const confirm = this.confirmAdopt(petId)
-        this.confirm = confirm
-        console.log(confirm)
+        this.confirmAdopt(petId)
+        this.$toast.success('Adoção confirmada!', { position: 'top-center' })
       } catch (error) {
-        console.log(error.response)
         this.$toast.error('Houve um erro ao confirmar adoção', {
           position: 'top-center',
         })
@@ -224,9 +268,16 @@ export default {
       }
     },
 
-    handleRejectAdoption() {
-      return (id) => {
-        //
+    handleRejectAdoption(petId) {
+      try {
+        this.rejectAdopt(petId)
+        this.$toast.success('Adoção recusada!', { position: 'top-center' })
+      } catch (error) {
+        this.$toast.error('Houve um erro ao recusar adoção', {
+          position: 'top-center',
+        })
+      } finally {
+        setTimeout(() => this.$toast.clear(), 7000)
       }
     },
   },

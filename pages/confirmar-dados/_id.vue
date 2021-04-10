@@ -18,7 +18,7 @@
         Informe seus dados
       </h1>
       <section class="mx-4 md:mx-auto md:w-1/2">
-        <form>
+        <form @submit.prevent="handleAdopt">
           <section>
             <a-input v-model="adopter.adopterName" label="Nome completo" />
           </section>
@@ -75,14 +75,16 @@ export default {
     },
   },
   methods: {
-    ...mapActions({ petAdopt: 'user/fetchPetAdopt' }),
+    ...mapActions({ petAdopt: 'user/petAdopt' }),
     async handleAdopt() {
       try {
         await this.petAdopt({
           petId: this.$route.params.id,
           formInfo: this.adopter,
         })
-        this.$toast.success('')
+        this.$toast.success('Obrigada por adotar um bichinho ❤️', {
+          position: 'top-center',
+        })
         this.$router.push('/pets')
       } catch (error) {
         this.$toast.error('Houve um erro ao adotar', { position: 'top-center' })

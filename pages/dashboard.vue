@@ -4,168 +4,276 @@
       <nav
         class="flex flex-wrap justify-center pb-4 md:justify-between md:pb-0 items-center bg-primary pt-4"
       >
-        <img src="../static/image/logo_no_bg.png" alt="" width="150" />
-        <!-- <input
-          class="w-1/3 rounded-full focus:outline-none pl-6"
-          type="text"
-          placeholder="Pesquisar..."
-          style="height: 40px"
-        /> -->
-        <a-button class="md:mr-5 mt-4 md:mt-0 text-white" size="lg"
-          >Entrar</a-button
-        >
+        <nuxt-link to="/meus-pets">
+          <img src="/image/logo_no_bg.png" alt="" width="150" />
+        </nuxt-link>
+        <nuxt-link v-if="!user.isLoggedIn" to="/entrar">
+          <a-button class="md:mr-5 mt-4 md:mt-0 text-white" size="lg">
+            Entrar
+          </a-button>
+        </nuxt-link>
+        <span v-if="user.isLoggedIn" class="md:mr-5 mt-4 md:mt-0 text-white">
+          <div class="flex justify-center">
+            <div class="relative">
+              <div class="flex">
+                <button
+                  class="flex z-10 rounded-md bg-primary p-2 focus:outline-none"
+                  @click="dropdownOpen = !dropdownOpen"
+                >
+                  <p class="pr-2">
+                    Bem vindo(a), <strong>{{ user.name }}</strong
+                    >!
+                  </p>
+                  <svg
+                    class="h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </button>
+              </div>
+
+              <div
+                v-show="dropdownOpen"
+                class=""
+                @click="dropdownOpen = false"
+              ></div>
+
+              <div
+                v-show="dropdownOpen"
+                class="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20"
+              >
+                <button
+                  class="block w-full text-left px-4 py-2 text-sm capitalize text-gray-700 hover:bg-secondary-100 hover:text-white"
+                  @click="handleLogout()"
+                >
+                  Sair
+                </button>
+              </div>
+            </div>
+          </div>
+        </span>
       </nav>
-      <img src="../static/image/wave.png" alt="" width="100%" />
+      <img src="/image/wave.png" alt="" width="100%" />
     </header>
-    <main class="container m-auto">
-      <h1 class="text-4xl font-bold text-primary-100">
-        Pets procurando um lar
-      </h1>
-      <section class="flex flex-wrap pb-6 pt-3">
-        <nuxt-link to="/listar-pets">
-          <button
-            class="w-32 mr-4 py-1 text-black border border-gray-500 rounded-lg"
+    <main v-if="pet" class="container m-auto mb-16">
+      <section class="w-full flex flex-col flex-wrap items-center m-auto mt-5">
+        <form class="mx-2 md:w-1/2 md:mx-0" action="">
+          <section class="flex justify-between mx-2 md:w-full md:mx-0">
+            <h1 class="text-3xl font-bold text-center my-4">Editar pet</h1>
+            <section class="flex items-center">
+              <a-button size="md" color="success"> Salvar </a-button>
+            </section>
+          </section>
+          <section
+            class="flex justify-center items-center mx-2 md:w-full md:mx-0"
           >
-            🐶 Cachorro
-          </button>
-        </nuxt-link>
-        <nuxt-link to="/listar-pets">
-          <button class="w-32 text-black border border-gray-500 rounded-lg">
-            🐱 Gato
-          </button>
-        </nuxt-link>
+            <img
+              :src="url"
+              class="object-cover w-full rounded-3xl"
+              style="height: 500px"
+            />
+          </section>
+          <div class="flex w-full items-center justify-center bg-grey-lighter">
+            <label
+              class="flex flex-col items-center justify-center space-y-4 text-primary hover:text-primary-500 cursor-pointer"
+            >
+              <span class="mt-2 text-base leading-normal">
+                Selecione um arquivo...
+              </span>
+              <input type="file" class="hidden" @change="handleFileChange" />
+            </label>
+          </div>
+          <section class="mx-4 md:w-full md:mx-0">
+            <section class="flex flex-wrap justify-between items-center">
+              <section class="md:w-32 w-full">
+                <a-input v-model="pet.name" label="Nome do pet" />
+              </section>
+              <section class="w-full md:flex md:w-1/2 flex-wrap">
+                <section class="flex w-full md:w-40">
+                  <p class="text-3xl mr-2 flex items-center">≈</p>
+                  <a-input
+                    v-model="pet.approximatedAge"
+                    label="Idade aproximada"
+                    fluid
+                    class="w-full"
+                  />
+                </section>
+                <section class="ml-5">
+                  <div class="flex items-center justify-center md:flex-col">
+                    <div class="text-gray-600 flex items-center mb-2">
+                      <input
+                        id="male"
+                        v-model="pet.gender"
+                        class="h-4 w-4 px-3 py-3 border rounded mr-2"
+                        name="gender"
+                        value="male"
+                        type="radio"
+                      />
+                      <label class="mr-4" for="male">Macho</label>
+                    </div>
+                    <div class="text-gray-600 flex items-center mb-2 md:w-full">
+                      <input
+                        id="female"
+                        v-model="pet.gender"
+                        class="h-4 w-4 px-3 py-3 border rounded mr-2"
+                        name="gender"
+                        value="female"
+                        type="radio"
+                      />
+                      <label for="female">Fêmea</label>
+                    </div>
+                  </div>
+                </section>
+              </section>
+            </section>
+            <section class="justify-center my-2 flex flex-wrap">
+              <span
+                class="flex flex-col w-full items-center md:items-start md:w-1/2"
+              >
+                <span>aaa</span>
+                <span>
+                  <span class="text-gray-600 items-center mb-2">
+                    <input
+                      id="dog"
+                      v-model="pet.type"
+                      class="h-4 w-4 px-3 py-3 border rounded mr-2"
+                      name="type"
+                      value="dog"
+                      type="radio"
+                    />
+                    <label class="mr-4" for="dog">Cachorro</label>
+                  </span>
+                  <span class="text-gray-600 items-center mb-2">
+                    <input
+                      id="cat"
+                      v-model="pet.type"
+                      class="h-4 w-4 px-3 py-3 border rounded mr-2"
+                      type="radio"
+                      name="type"
+                      value="cat"
+                    />
+                    <label for="cat">Gato</label>
+                  </span>
+                </span>
+              </span>
+              <span class="text-2xl mx-2">•</span>
+              <span class="flex flex-col">
+                <span>aaa</span>
+                <span>
+                  <span class="text-gray-600 items-center mb-2">
+                    <input
+                      id="castrated"
+                      v-model="pet.isCastrated"
+                      class="h-4 w-4 px-3 py-3 border rounded mr-2"
+                      name="castrated"
+                      :value="true"
+                      type="radio"
+                    />
+                    <label class="mr-4" for="castrated">Sim</label>
+                  </span>
+                  <span class="text-gray-600 items-center mb-2">
+                    <input
+                      id="noCastrated"
+                      v-model="pet.isCastrated"
+                      class="h-4 w-4 px-3 py-3 border rounded mr-2"
+                      name="castrated"
+                      :value="false"
+                      type="radio"
+                    />
+                    <label for="noCastrated">Não</label>
+                  </span>
+                </span>
+              </span>
+              <span class="text-2xl mx-2">•</span>
+              <span class="flex flex-col">
+                <span>aaa</span>
+                <span>
+                  <span class="text-gray-600 items-center mb-2">
+                    <input
+                      id="vaccinated"
+                      v-model="pet.isVaccinated"
+                      class="h-4 w-4 px-3 py-3 border rounded mr-2"
+                      name="vaccinated"
+                      :value="true"
+                      type="radio"
+                    />
+                    <label class="mr-4" for="vaccinated">Sim</label>
+                  </span>
+                  <span class="text-gray-600 items-center mb-2">
+                    <input
+                      id="noVaccinated"
+                      v-model="pet.isVaccinated"
+                      class="h-4 w-4 px-3 py-3 border rounded mr-2"
+                      name="vaccinate"
+                      :value="false"
+                      type="radio"
+                    />
+                    <label for="noVaccinated">Não</label>
+                  </span>
+                </span>
+              </span>
+            </section>
+            <section>
+              <p class="text-lg text-justify">
+                <textarea
+                  id="adoptreason"
+                  v-model="pet.adoptionReason"
+                  class="w-full text-gray-600 px-2 py-2 border border-gray-500 focus:outline-none resize-none rounded-lg focus:border-gray-600"
+                  name="Razão da adoção"
+                  placeholder="Razão da adoção"
+                  cols="4"
+                  rows="3"
+                ></textarea>
+              </p>
+            </section>
+            <section class="mt-3">
+              <p class="text-lg font-bold">Informações extras:</p>
+              <p class="text-lg text-justify">
+                <textarea
+                  id="extrainfo"
+                  v-model="pet.extraInformations"
+                  class="w-full text-gray-600 px-3 py-2 border border-gray-500 mb-4 focus:outline-none resize-none rounded-lg focus:border-gray-600"
+                  name="Informações extras"
+                  placeholder="Informações extras"
+                  cols="4"
+                  rows="3"
+                ></textarea>
+              </p>
+            </section>
+          </section>
+        </form>
       </section>
-      <!---->
-      <article class="flex pb-12">
-        <section
-          class="w-64 mr-0 mb-4 sm:mr-4 md:mr-16 md:mb-0 text-white"
-          style="height: 320px"
-        >
-          <a-animal-card
-            bg="https://i.ytimg.com/vi/MPV2METPeJU/maxresdefault.jpg"
-          >
-            <section
-              class="flex justify-end pr-4 customDetailsUp"
-              style="height: 50%"
-            >
-              <p class="text-4xl textShadow">&#9794;</p>
-            </section>
-            <section class="flex items-end" style="height: 50%">
-              <section class="pl-2 pb-2 w-full customDetailsBottom">
-                <h1 class="text-2xl textShadow">Doguinho</h1>
-                <p class="pb-2 textShadow">≈ 1 ano</p>
-                <a-button color="secondary" size="sm">Adote-me</a-button>
-              </section>
-            </section>
-          </a-animal-card>
-        </section>
-        <section
-          class="w-64 mr-0 mb-4 sm:mr-4 md:mr-16 md:mb-0 text-white"
-          style="height: 320px"
-        >
-          <a-animal-card
-            bg="https://timesofindia.indiatimes.com/photo/67586673.cms"
-          >
-            <section
-              class="flex justify-end pr-4 customDetailsUp"
-              style="height: 50%"
-            >
-              <p class="text-4xl textShadow">&#9792;</p>
-            </section>
-            <section class="flex items-end" style="height: 50%">
-              <section class="pl-2 pb-2 w-full customDetailsBottom">
-                <h1 class="text-2xl textShadow">Catinha</h1>
-                <p class="pb-2 textShadow">≈ 6 meses</p>
-                <a-button color="secondary" size="sm">Adote-me</a-button>
-              </section>
-            </section>
-          </a-animal-card>
-        </section>
-      </article>
-      <!---->
-      <h2
-        class="text-4xl text-center md:text-left pb-5 font-bold text-primary-100"
-      >
-        ONGs próximas a você
-      </h2>
-      <article class="flex flex-wrap justify-around">
-        <section class="flex py-6">
-          <img
-            class="rounded-xl"
-            src="https://i.pinimg.com/236x/80/a0/97/80a09701f662a1ac3af18ebf98b6fdba.jpg"
-            alt=""
-            width="120"
-          />
-          <section class="pl-2">
-            <p class="text-xl">Nome Ong</p>
-            <p class="pb-2">
-              Rua das Laranjeiras, 355 <br />
-              Senhor do Bonfim - BA <br />
-            </p>
-            <a-button color="secondary" size="sm">Visite o perfil</a-button>
-          </section>
-        </section>
-        <section class="flex py-6">
-          <img
-            class="rounded-xl"
-            src="https://i.pinimg.com/236x/aa/33/51/aa33517396da6c11ee80129ad9d3f537.jpg"
-            alt=""
-            width="120"
-          />
-          <section class="pl-2">
-            <p class="text-xl">Nome Ong</p>
-            <p class="pb-2">
-              Rua das Laranjeiras, 355 <br />
-              Senhor do Bonfim - BA <br />
-            </p>
-            <a-button color="secondary" size="sm">Visite o perfil</a-button>
-          </section>
-        </section>
-        <section class="flex py-6">
-          <img
-            class="rounded-xl"
-            src="https://png.pngtree.com/png-clipart/20190120/ourlarge/pngtree-dog-cat-pet-shovel-officer-png-image_494987.jpg"
-            alt=""
-            width="120"
-          />
-          <section class="pl-2">
-            <p class="text-xl">Nome Ong</p>
-            <p class="pb-2">
-              Rua das Laranjeiras, 355 <br />
-              Senhor do Bonfim - BA <br />
-            </p>
-            <a-button color="secondary" size="sm">Visite o perfil</a-button>
-          </section>
-        </section>
-        <section class="flex py-6">
-          <img
-            class="rounded-xl"
-            src="https://www.ubatuba.sp.gov.br/wp-content/uploads/sites/2/2017/04/0425-adocao-CCZ-ubatuba-logo-770x689.png"
-            alt=""
-            width="120"
-          />
-          <section class="pl-2">
-            <p class="text-xl">Nome Ong</p>
-            <p class="pb-2">
-              Rua das Laranjeiras, 355 <br />
-              Senhor do Bonfim - BA <br />
-            </p>
-            <a-button color="secondary" size="sm">Visite o perfil</a-button>
-          </section>
-        </section>
-      </article>
     </main>
   </div>
 </template>
 
 <script>
+import 'vueperslides/dist/vueperslides.css'
 import { mapActions, mapState } from 'vuex'
 export default {
   middleware: ['authenticated'],
   data() {
     return {
-      pets: [],
       dropdownOpen: false,
+      pet: {
+        name: '',
+        type: '',
+        gender: '',
+        isCastrated: true,
+        isVaccinated: true,
+        approximatedAge: '',
+        adoptionReason: '',
+        extraInformations: '',
+      },
+      image: null,
+      url: null,
     }
   },
 
@@ -173,19 +281,36 @@ export default {
     ...mapState({ user: 'user' }),
   },
 
-  mounted() {
-    this.handleFetchPets()
-  },
-
   methods: {
-    ...mapActions({ fetchPets: 'user/fetchPets' }),
+    ...mapActions({
+      logout: 'user/logout',
+    }),
 
-    async handleFetchPets() {
+    handleLogout() {
       try {
-        const pets = await this.fetchPets()
-        this.pets = pets
+        this.logout(this.user)
+        this.$router.push('/entrar')
       } catch (error) {
-        this.$toast.error('Houve um erro ao buscar animais', {
+        this.$toast.error('Houve um erro ao deslogar', {
+          position: 'top-center',
+        })
+        this.$router.push('/')
+      } finally {
+        setTimeout(() => this.$toast.clear(), 7000)
+      }
+    },
+    handleFileChange(e) {
+      this.image = e.target.files[0]
+      this.url = URL.createObjectURL(this.image)
+    },
+    async handleUploadAvatar(e) {
+      const formData = new FormData()
+      formData.append('avatar', this.image)
+      try {
+        await this.uploadAvatar(formData)
+        this.$router.push('/meus-pets')
+      } catch {
+        this.$toast.error('Houve um erro durante o upload do arquivo!', {
           position: 'top-center',
         })
       }
@@ -193,21 +318,3 @@ export default {
   },
 }
 </script>
-
-<style>
-.customDetailsUp {
-  background-image: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.2),
-    rgba(0, 0, 0, 0)
-  );
-  border-radius: 10px 10px 0px 0px;
-}
-.customDetailsBottom {
-  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
-  border-radius: 0px 0px 10px 10px;
-}
-.textShadow {
-  text-shadow: 1px 1px 3px #000;
-}
-</style>
