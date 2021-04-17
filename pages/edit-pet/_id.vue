@@ -42,6 +42,13 @@
                 v-show="dropdownOpen"
                 class="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20"
               >
+                <nuxt-link to="/perfil">
+                  <button
+                    class="block w-full text-left px-4 py-2 text-sm capitalize text-gray-700 hover:bg-secondary-100 hover:text-white"
+                  >
+                    Perfil
+                  </button>
+                </nuxt-link>
                 <button
                   class="block w-full text-left px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white"
                   @click="handleLogout"
@@ -57,12 +64,12 @@
     </header>
     <main v-if="pet" class="container m-auto">
       <h1 class="text-2xl text-center font-bold mt-4 mx-4 md:mx-0">
-        <nuxt-link to="/meus-pets">
+        <nuxt-link :to="'/detalhes-pet/' + pet.id">
           <button class="float-left text-md font-bold">&#9001;</button>
         </nuxt-link>
         Editar pet
       </h1>
-      <section class="mx-4 md:mx-auto md:w-1/2">
+      <section class="mx-4 md:mx-auto md:w-1/2 mb-4">
         <form @submit.prevent="handleUpdatePet">
           <section
             class="flex justify-center items-center mx-2 md:w-full md:mx-0"
@@ -330,9 +337,16 @@ export default {
         this.$router.push('/meus-pets')
       } catch (error) {
         console.log(error.response)
-        this.$toast.error('Houve problemas no cadastro', {
-          position: 'top-center',
-        })
+        const statusCode = error.response.status
+        if (statusCode === 400) {
+          this.$toast.error('Não é possivel mudar imagem de pets adotados', {
+            position: 'top-center',
+          })
+        } else {
+          this.$toast.error('Houve problemas no cadastro', {
+            position: 'top-center',
+          })
+        }
       } finally {
         setTimeout(() => this.$toast.clear(), 7000)
       }

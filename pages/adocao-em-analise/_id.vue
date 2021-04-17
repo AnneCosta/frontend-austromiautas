@@ -23,7 +23,12 @@
         <p>
           Pedimos que você entre em contato com o doador para que seja possível
           prosseguir com a adoção e você possa levar o seu pet pra casa. O
-          número que você pode entrar em contato é: {{ user.name }} !
+          número que você pode entrar em contato é:
+          <span v-for="(contact, index) in donator.contacts" :key="index">
+            <section>
+              {{ contact.contact }}
+            </section> </span
+          >!
         </p>
       </section>
     </main>
@@ -34,24 +39,30 @@
 import { mapActions, mapState } from 'vuex'
 export default {
   data() {
-    return {}
+    return {
+      donator: null,
+    }
   },
 
   computed: {
     ...mapState({ user: 'user' }),
   },
 
+  mounted() {
+    this.handleGetOwner()
+  },
+
   methods: {
     ...mapActions({
-      registerPets: 'user/registerPets',
-      donator: 'user/fetchGetDonators',
+      petGetOwner: 'user/petGetOwner',
     }),
-    async handleRegisterPet() {
+    async handleGetOwner() {
       try {
-        await this.registerPets(this.newPet)
-        this.$router.push('/meus-pets')
+        const donator = await this.petGetOwner(this.$route.params.id)
+        this.donator = donator
       } catch (error) {
-        this.$toast.error('Houve problemas no cadastro', {
+        console.log(error.response)
+        this.$toast.error('Houve problemas na exibição de contato do doador', {
           position: 'top-center',
         })
       } finally {

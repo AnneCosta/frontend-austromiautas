@@ -19,9 +19,7 @@
           Bem vindo à Austromiautas
         </h1>
 
-        <p
-          class="text-white antialiased text-sm md:text-xl xl:text-2xl 2xl:text-5xl my-6"
-        >
+        <p class="text-white antialiased text-sm md:text-xl xl:text-2xl my-6">
           Nós conectamos pessoas que <br />
           querem doar seus pets à pessoas <br />
           que querem adotá-los.
@@ -67,14 +65,14 @@
     <section class="p-8">
       <div class="space-y-5 flex flex-col justify-end items-end">
         <h1
-          class="font-bold leading-none text-gray-200 text-xl sm:text-3xl xl:text-4xl 2xl:text-6xl text-right"
+          class="font-bold leading-none text-gray-200 text-xl sm:text-3xl xl:text-4xl text-right"
         >
           Encontre pessoas <br class="inline-block sm:hidden" />
           para adotar um pet
         </h1>
 
         <p
-          class="text-white antialiased text-sm md:text-xl xl:text-2xl 2xl:text-5xl text-right"
+          class="text-white antialiased text-sm md:text-xl xl:text-2xl text-right"
         >
           Nós sabemos os desafios de se ter um <br class="hidden sm:inline" />
           ou mais pets, por isso criamos um espaço

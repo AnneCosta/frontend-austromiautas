@@ -10,9 +10,19 @@
             <div class="relative">
               <div class="flex">
                 <button
-                  class="flex z-10 rounded-md bg-primary p-2 focus:outline-none"
+                  class="flex items-center z-10 rounded-md bg-primary p-2 focus:outline-none"
                   @click="dropdownOpen = !dropdownOpen"
                 >
+                  <img
+                    class="rounded-full mr-2"
+                    :src="
+                      user.avatar
+                        ? `http://localhost:3001/static/images/${user.avatar}`
+                        : 'https://i.imgur.com/sbDUqps.png'
+                    "
+                    alt=""
+                    width="40"
+                  />
                   <p class="pr-2">
                     Bem vindo(a), <strong>{{ user.name }}</strong
                     >!
@@ -42,8 +52,15 @@
                 v-show="dropdownOpen"
                 class="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20"
               >
+                <nuxt-link to="/perfil">
+                  <button
+                    class="block w-full text-left px-4 py-2 text-sm capitalize text-gray-700 hover:bg-secondary-100 hover:text-white"
+                  >
+                    Perfil
+                  </button>
+                </nuxt-link>
                 <button
-                  class="block w-full text-left px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white"
+                  class="block w-full text-left px-4 py-2 text-sm capitalize text-gray-700 hover:bg-secondary-100 hover:text-white"
                   @click="handleLogout"
                 >
                   Sair
@@ -227,7 +244,19 @@ export default {
   },
 
   methods: {
-    ...mapActions({ registerPets: 'user/registerPets' }),
+    ...mapActions({ logout: 'user/logout', registerPets: 'user/registerPets' }),
+    handleLogout() {
+      try {
+        this.logout(this.user)
+        this.$router.push('/entrar')
+      } catch (error) {
+        this.$toast.error('Houve um erro ao deslogar', {
+          position: 'top-center',
+        })
+      } finally {
+        setTimeout(() => this.$toast.clear(), 7000)
+      }
+    },
     async handleRegisterPet() {
       try {
         await this.registerPets(this.newPet)

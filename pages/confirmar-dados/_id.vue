@@ -77,15 +77,16 @@ export default {
   methods: {
     ...mapActions({ petAdopt: 'user/petAdopt' }),
     async handleAdopt() {
+      const id = this.$route.params.id
       try {
         await this.petAdopt({
-          petId: this.$route.params.id,
+          petId: id,
           formInfo: this.adopter,
         })
         this.$toast.success('Obrigada por adotar um bichinho ❤️', {
           position: 'top-center',
         })
-        this.$router.push('/pets')
+        this.$router.push(`/adocao-em-analise/${id}`)
       } catch (error) {
         this.$toast.error('Houve um erro ao adotar', { position: 'top-center' })
       } finally {

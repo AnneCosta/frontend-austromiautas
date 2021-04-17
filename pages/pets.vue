@@ -5,12 +5,6 @@
         class="flex flex-wrap justify-center pb-4 md:justify-between md:pb-0 items-center bg-primary pt-4"
       >
         <img src="../static/image/logo_no_bg.png" alt="" width="150" />
-        <!-- <input
-          class="w-1/3 rounded-full focus:outline-none pl-6"
-          type="text"
-          placeholder="Pesquisar..."
-          style="height: 40px"
-        /> -->
         <nuxt-link to="/entrar">
           <a-button class="md:mr-5 mt-4 md:mt-0 text-white" size="lg">
             Entrar
@@ -24,30 +18,34 @@
         Pets procurando um lar
       </h1>
       <section class="flex flex-wrap pb-6 pt-3">
-        <nuxt-link to="/listar-pets">
-          <button
-            class="w-32 mr-4 py-1 text-black border border-gray-500 rounded-lg"
-          >
-            🐶 Cachorro
-          </button>
-        </nuxt-link>
-        <nuxt-link to="/listar-pets">
-          <button
-            class="w-32 py-1 text-black border border-gray-500 rounded-lg"
-          >
-            🐱 Gato
-          </button>
-        </nuxt-link>
+        <button
+          class="w-32 mr-4 py-1 text-black border border-gray-500 rounded-lg"
+          @click="filterBy == 'dog' ? (filterBy = null) : (filterBy = 'dog')"
+        >
+          🐶 Cachorro
+        </button>
+        <button
+          class="w-32 py-1 text-black border border-gray-500 rounded-lg"
+          @click="filterBy == 'cat' ? (filterBy = null) : (filterBy = 'cat')"
+        >
+          🐱 Gato
+        </button>
       </section>
-      <!---->
+
       <article class="flex pb-12 flex-wrap justify-center md:justify-start">
-        <div v-for="pet in pets" :key="pet.id">
+        <div v-for="pet in filteredPets" :key="pet.id">
           <section
             v-if="pet.adoptionStatus == 'waiting'"
             class="w-64 mr-0 mb-4 my-4 sm:mr-4 md:mr-16 md:mb-0 text-white"
             style="height: 320px"
           >
-            <a-animal-card bg="https://i.imgur.com/VmCQnLK.png">
+            <a-animal-card
+              :bg="
+                pet.avatar
+                  ? `http://localhost:3001/static/images/${pet.avatar}`
+                  : 'https://i.imgur.com/VmCQnLK.png'
+              "
+            >
               <section
                 class="flex justify-end pr-4 customDetailsUp"
                 style="height: 50%"
@@ -74,7 +72,7 @@
           </section>
         </div>
       </article>
-      <!---->
+
       <h2
         class="text-4xl text-center md:text-left pb-5 font-bold text-primary-100"
       >
@@ -157,11 +155,17 @@ export default {
     return {
       pets: [],
       dropdownOpen: false,
+      filterBy: null,
     }
   },
 
   computed: {
     ...mapState({ user: 'user' }),
+    filteredPets() {
+      return this.filterBy
+        ? this.pets.filter((pet) => pet.type === this.filterBy)
+        : this.pets
+    },
   },
 
   mounted() {

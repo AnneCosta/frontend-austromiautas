@@ -1,6 +1,17 @@
 <template>
   <div class="min-h-screen bg-primary">
-    <div class="min-h-screen min-w-full flex justify-center items-center px-8">
+    <div
+      class="min-h-screen min-w-full flex flex-col justify-center items-center px-8"
+    >
+      <section class="login-container flex justify-end mb-1 z-10">
+        <span class="mr-2">
+          <nuxt-link to="/">
+            <span class="text-white">
+              <img src="/image/homefill.svg" alt="" class="w-5" />
+            </span>
+          </nuxt-link>
+        </span>
+      </section>
       <a-card class="flex flex-col login-container relative z-10" fluid>
         <h1 class="text-primary font-bold text-3xl">Entrar</h1>
 
@@ -98,25 +109,31 @@ export default {
   }
 }
 
-@media (max-width: $bp-md) {
+@media (min-width: $bp-sm) {
   .login-container {
     width: 360px;
   }
 }
 
-@media (max-width: $bp-lg) {
+@media (min-width: $bp-md) {
+  .login-container {
+    width: 360px;
+  }
+}
+
+@media (min-width: $bp-lg) {
   .login-container {
     width: 380px;
   }
 }
 
-@media (max-width: $bp-xl) {
+@media (min-width: $bp-xl) {
   .login-container {
     width: 420px;
   }
 }
 
-@media (max-width: $bp-2xl) {
+@media (min-width: $bp-2xl) {
   .login-container {
     width: 480px;
   }
