@@ -32,6 +32,7 @@ export default {
   methods: {
     async initialize() {
       const token = localStorage.getItem('token')
+      console.log(token)
       if (typeof token === 'string') {
         this.setAccessToken(token)
         this.setLoginStatus(true)
@@ -42,7 +43,9 @@ export default {
           this.setContacts(user.contacts)
           this.setAvatar(user.avatar)
           await this.checkProfileAndRedirect()
-        } catch {
+        } catch (error) {
+          console.log(error)
+
           this.logout()
         }
       }
