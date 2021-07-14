@@ -1,9 +1,8 @@
 export default {
-  // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'front-austromiautas',
+    title: 'Austromiautas',
     htmlAttrs: {
-      lang: 'en',
+      lang: 'pt-BR',
     },
     meta: [
       { charset: 'utf-8' },
@@ -13,32 +12,31 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
-  // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  server: {
+    host: process.env.APP_HOST ?? '0.0.0.0',
+    port: process.env.APP_PORT ?? 80,
+  },
 
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
+  css: ['@/assets/scss/main.scss'],
+
   plugins: [],
 
-  // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [
-    // https://go.nuxtjs.dev/eslint
-    '@nuxtjs/eslint-module',
-    // https://go.nuxtjs.dev/tailwindcss
-    '@nuxtjs/tailwindcss',
-  ],
+  buildModules: ['@nuxtjs/eslint-module', '@nuxtjs/tailwindcss'],
 
-  // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-    // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios',
-  ],
+  modules: ['@nuxtjs/axios', '@nuxtjs/toast', '@nuxtjs/style-resources'],
 
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  styleResources: {
+    scss: ['@/assets/scss/main.scss'],
+  },
 
-  // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  axios: {
+    baseURL: `${process.env.API_PROTOCOL}://${process.env.API_HOST}:${process.env.API_PORT}`,
+    headers: {
+      common: {
+        'X-API-TOKEN': process.env.X_API_TOKEN,
+      },
+    },
+  },
 }

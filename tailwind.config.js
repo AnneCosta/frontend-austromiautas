@@ -3,16 +3,74 @@ module.exports = {
     // removeDeprecatedGapUtilities: true,
     // purgeLayersByDefault: true,
   },
-  purge: [],
+  purge: {
+    enabled: false,
+  },
   theme: {
     extend: {
       colors: {
-        'dark-custom': '#202567',
-        'pink-custom': '#E5286B',
-        'pink-dark-custom': '#b81d53',
+        primary: {
+          100: '#29408A',
+          200: '#253A7D',
+          300: '#1C2B5C',
+          400: '#181B4D',
+          500: '#141F42',
+          default: '#1C2B5C',
+        },
+        secondary: {
+          100: '#F22970',
+          200: '#B31E52',
+          300: '#A61C4C',
+          400: '#8C1841',
+          500: '#66112F',
+          default: '#F22970',
+        },
+        success: {
+          100: '#6FF233',
+          200: '#52B325',
+          300: '#357318',
+          400: '#2F6615',
+          500: '#234D10',
+          default: '#52B325',
+        },
+        danger: {
+          100: '#FA4838',
+          200: '#E04031',
+          300: '#BA3529',
+          400: '#7A231B',
+          500: '#3B110D',
+          default: '#E04031',
+        },
+        warning: {
+          100: '#FAB938',
+          200: '#E0A631',
+          300: '#BA8A29',
+          400: '#7A5B1B',
+          500: '#3B2B0D',
+          default: '#FAB938',
+        },
+        info: {
+          100: '#00E6E6',
+          200: '#00A6A6',
+          300: '#009999',
+          400: '#008080',
+          500: '#005959',
+          default: '#00A6A6',
+        },
+      },
+      fontFamily: {
+        sans: ['Assistant', 'sans-serif'],
+      },
+      screens: {
+        '2xl': '1536px',
+        '3xl': '1980px',
       },
     },
   },
-  variants: {},
+  variants: {
+    extend: {
+      textColor: ['last'],
+    },
+  },
   plugins: [],
 }

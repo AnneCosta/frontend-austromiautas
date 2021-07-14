@@ -1,0 +1,56 @@
+version: "3.7"
+
+services:
+  app_v1:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - ${APP_PORT}:${APP_PORT}
+    networks: 
+      - app
+    depends_on: 
+      - api_v1
+    volumes: 
+      - .:/usr/app
+    restart: on-failure
+
+  api_v1:
+    image: gabrieljsilva/austromiautas:1.3.0
+    ports: 
+      - ${API_PORT}:${API_PORT}
+    networks: 
+      - app
+    depends_on: 
+      - postgresdb
+      - redisdb
+    env_file: 
+      - .env
+    environment: 
+    - APP_HOST=${API_HOST}
+    - APP_PORT=${API_PORT}
+    - APP_PROTOCOL=${API_PROTOCOL}
+    - APP_SECRET=${API_SECRET}
+    - ALLOW_INSECURE_REQUESTS=true
+    restart: always
+
+  postgresdb:
+    image: postgres:13.1-alpine
+    environment: 
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=austromiautas
+    volumes:
+      - /var/lib/postgresql/data
+    ports: 
+      - ${DB_PORT}:${DB_PORT}
+    networks: 
+      - app
+
+  redisdb:
+    image: redis:6.2.0
+    networks: 
+      - app
+  
+networks:
+  app:
